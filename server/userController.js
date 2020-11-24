@@ -62,7 +62,8 @@ module.exports = {
                 }
             }
         }catch (err){
-            'Database error with register function', err
+            console.log('Database error with register function', err)
+            res.sendStatus(500)
         }
     },
     logout: (req, res) => {

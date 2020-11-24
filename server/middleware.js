@@ -8,3 +8,5 @@ module.exports = {
       next();
     },
   };
+
+  //# Checks if there is a user logged in

@@ -4,13 +4,12 @@ const massive = require('massive');
 const session = require('express-session');
 
 const userCtrl = require('./userController');
-
+const postCtrl = require('./postController');
 
 const {checkUser} = require('./middleware');
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
-const port= SERVER_PORT;
 const app = express();
 
 app.use(express.json());
@@ -33,6 +32,7 @@ massive({
     console.log('Database connected')
 }).catch(err => console.log(err));
 
+//!ENDPOINTS
 //# User Endpoints
 app.get('/api/user', checkUser, userCtrl.getUser);
 app.put('/auth/user', checkUser, userCtrl.editUser);
@@ -41,8 +41,18 @@ app.post('/auth/register', userCtrl.register);
 app.delete('auth/logout', userCtrl.logout);
 
 //# Post Endpoints
+app.get('/api/posts', postCtrl.checkPosts);
+app.get('/api/posts/:id', postCtrl.findPost);
+app.post('/api/posts', checkUser, postCtrl.createPost);
+app.put('/api/posts/:id', checkUser, postCtrl.updatePost);
+app.delete('/api/posts/:id', checkUser, postCtrl.deletePost);
 
 //#Comment Endpoints
+app.get('/api/comments', commCtrl.checkComments);
+app.get('/api/comments/:id', commCtrl.findComment);
+app.post('/api/comments', checkUser, commCtrl.postComment);
+app.put('/api/comments/:id', checkUser, commCtrl.updateComment);
+app.delete('/api/comments/:id', checkUser, commCtrl.deleteComments);
 
-
+const port= SERVER_PORT;
 app.listen(port, ()=>console.log(`Server listening on port ${port}`))
