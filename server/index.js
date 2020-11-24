@@ -3,6 +3,11 @@ const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
 
+const userCtrl = require('./userController');
+
+
+const {checkUser} = require('./middleware');
+
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
 const port= SERVER_PORT;
@@ -29,6 +34,11 @@ massive({
 }).catch(err => console.log(err));
 
 //# User Endpoints
+app.get('/api/user', checkUser, userCtrl.getUser);
+app.put('/auth/user', checkUser, userCtrl.editUser);
+app.post('/auth/login', userCtrl.login);
+app.post('/auth/register', userCtrl.register);
+app.delete('auth/logout', userCtrl.logout);
 
 //# Post Endpoints
 
