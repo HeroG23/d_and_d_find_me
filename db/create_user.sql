@@ -1,3 +1,5 @@
-INSERT INTO dungeon_user(email, username, password, dm, online)
+INSERT INTO users(email, username, password, dm, online)
 VALUES
 ($1, $2, $3, $4, $5;)
+
+--making a user

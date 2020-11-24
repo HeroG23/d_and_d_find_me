@@ -1,2 +1,4 @@
-DELETE FROM dungeon_user
+DELETE FROM users
 WHERE user_id = $1
+
+--deleting a specific user
