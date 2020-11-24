@@ -1,4 +1,4 @@
-SELECT c.comment_id, c.body, c.post_id, c.user_id, p.post_id, u.user_id
+SELECT c*, p.post_id, u.user_id
 FROM comments c
 JOIN users u AND posts p
 ON c.user_id = u.user_id AND c.post_id = p.post_id

@@ -14,6 +14,17 @@ module.exports = {
             res.status(404).send('This is not the post you are looking for.')
         }
     },
+    findPostsByUser: async(req,res) =>{
+        const db = req.app.get('db')
+        const {id} = req.params;
+        const {user_id} = req.session.user
+        const posts = await db.posts.findPostsByUser([+id, user_id]);
+        if(posts){
+            res.status(200).send(posts)
+        } else {
+            res.status(404).send('You have made an error in judgement')
+        }
+    },
     createPost: async(req, res) => {
         const db = req.app.get('db');
         const {title, content, post_url} = req.body;

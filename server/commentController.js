@@ -4,7 +4,7 @@ module.exports = {
         const comments = await db.comments.check_comments();
         res.status(200).send(comments)
     },
-    findPost: async(req, res) => {
+    findComment: async(req, res) => {
         const db = req.app.get('db');
         const {id} = req.params;
         const [comment] = await db.comments.find_post(+id);
@@ -14,11 +14,22 @@ module.exports = {
             res.status(404).send('Could not locate the comment')
         }
     },
+    findCommentsByUserPosts: async(req, res)=>{
+        const db = req.app.get('db');
+        const {id} = req.params;
+        const {post_id} = req.body;
+        const {user_id} = req.session.user;
+        const comments = await db.comments.find_comment_by_user_posts([+id, +post_id, +user_id])
+        if(comments){
+            res.status(200).send(comments)
+        } else {
+            res.status(404).send('Could not locate user comments')
+        }
+    },
     postComment: async(req, res) => {
         const db = req.app.get('db');
-        const {body} = req.body
+        const {body, post_id} = req.body
         const {user_id} = req.session.user;
-        const {post_id} = req.session.post;
         try {
             const comment = await db.comments.post_comment([body, user_id, post_id]);
             res.status(200).send(comment)
