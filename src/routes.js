@@ -12,8 +12,8 @@ export default (
     <Switch>
         <Route exact path='/' component={Auth}/>
         <Route path='/feed' component={Feed}/>
-        <Route path='/post/:id' component={Posts}/>
-        <Route path='/comment/:id' component={Comments}/>
+        <Route path='/posts/:id' component={Posts}/>
+        <Route path='/comments/:id' component={Comments}/>
         <Route path='/new' component={Form}/>
         <Route path='/fun' component={FunStories}/>
         <Route path='/profile' component={Profile}/>
