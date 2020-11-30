@@ -5,6 +5,7 @@ const session = require('express-session');
 
 const userCtrl = require('./userController');
 const postCtrl = require('./postController');
+const commCtrl = require('./commentController')
 
 const {checkUser} = require('./middleware');
 
@@ -38,7 +39,7 @@ app.get('/api/user', checkUser, userCtrl.getUser);
 app.put('/auth/user', checkUser, userCtrl.editUser);
 app.post('/auth/login', userCtrl.login);
 app.post('/auth/register', userCtrl.register);
-app.delete('auth/logout', userCtrl.logout);
+app.delete('/auth/logout', userCtrl.logout);
 
 //# Post Endpoints
 app.get('/api/posts', postCtrl.checkPosts);
@@ -54,7 +55,7 @@ app.get('/api/comments/:id', commCtrl.findComment);
 app.get('/api/comments/:id', commCtrl.findCommentsByUsersPosts);
 app.post('/api/comments', checkUser, commCtrl.postComment);
 app.put('/api/comments/:id', checkUser, commCtrl.updateComment);
-app.delete('/api/comments/:id', checkUser, commCtrl.deleteComments);
+app.delete('/api/comments/:id', checkUser, commCtrl.deleteComment);
 
 const port= SERVER_PORT;
 app.listen(port, ()=>console.log(`Server listening on port ${port}`))

@@ -33,10 +33,10 @@ module.exports = {
                     };
                     res.status(200).send(req.session.user);
                 }else {
-                    res.status(404).send('Username or password incorrect');
+                    res.status(409).send('Username or password incorrect');
                 }
             }else {
-                res.status(404).send('Username or password incorrect');
+                res.status(409).send('Username or password incorrect');
             }
         }catch(err){
             console.log('Database error on login function', err)
@@ -50,15 +50,15 @@ module.exports = {
         const {email, username, password, dm, online} = req.body;
 
         try {
-            const [foundUser] = await db.auth.find_email(email)
+            const [foundUser] = await db.auth.check_email(email)
             if(foundUser){
-                res.status(404).send('User already exists');
+                res.status(409).send('User already exists');
             }else{
                 const salt = bcrypt.genSaltSync(10);
                 const hash = bcrypt.hashSync(password, salt);
-                const [newUser] = await db.auth.check_user(username)
+                let [newUser] = await db.auth.check_user(username)
                 if(newUser){
-                    res.status(404).send('username already used')
+                    res.status(409).send('username already used')
                 } else {
                     newUser = await db.auth.create_user([email, username, hash, dm, online]);
                     req.session.user = newUser;
