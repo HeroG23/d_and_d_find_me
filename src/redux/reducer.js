@@ -3,7 +3,7 @@ const initialState = {username: '', dm: ''}
 const USER = 'USER';
 const LOGOUT = 'LOGOUT';
 
-export function constUser(user){
+export function getUser(user){
     return {
         type:USER,
         payload: user
@@ -19,7 +19,7 @@ export function logout(){
 export default function reducer(state = initialState, action){
     let {type, payload} = action;
     switch(type){
-        case constUser:
+        case getUser:
             return{...state, username: payload.username, dm: payload.dm};
         case logout:
             return initialState;
