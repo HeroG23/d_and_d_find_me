@@ -92,7 +92,7 @@ class Auth extends Component {
           <div className="Register">
             <h1>D&D Find Me</h1>
             <br />
-            <h2>Register Now!</h2>
+            <h2>Register</h2>
             <br />
             <p>email:</p>
             <input
