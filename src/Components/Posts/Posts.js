@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import {useMatch} from 'react-router-dom';
 import {setPosts} from '../../redux/postReducer';
 
 const Posts = (props) => {
@@ -9,13 +8,12 @@ const Posts = (props) => {
   const [content, setContent] = useState(props.post.content);
   const [location, setLocation] = useState(props.post.post_address);
   const [author, setAuthor] = useState(props.user.username);
-  const [loading, setLoading] = useState(true)
-  const [edit, setEdit] = useState(false);
+  const [loading] = useState(true)
   
-  const match = useMatch();
+  
   
    useEffect(() => {
-     const getPosts = () =>{
+     const getPost = async () =>{
        try{ 
          const post = await axios.get(`/api/posts/${props.match.params.id}`)
          setPosts(post.data)
@@ -23,8 +21,8 @@ const Posts = (props) => {
          alert(err)
        }
      }
-     getPosts()
-   }, []);
+     getPost()
+   });
 
   return (
     <div className="Posts content-box">
