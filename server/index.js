@@ -5,11 +5,12 @@ const session = require('express-session');
 
 const userCtrl = require('./userController');
 const postCtrl = require('./postController');
-const commCtrl = require('./commentController')
+const commCtrl = require('./commentController');
+const locCtrl = require('./locationController');
 
 const {checkUser} = require('./middleware');
 
-const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
+const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, REACT_APP_API_KEY} = process.env;
 
 const app = express();
 
@@ -56,6 +57,9 @@ app.get('/api/comments/:id', commCtrl.findCommentsByUsersPosts);
 app.post('/api/comments', checkUser, commCtrl.postComment);
 app.put('/api/comments/:id', checkUser, commCtrl.updateComment);
 app.delete('/api/comments/:id', checkUser, commCtrl.deleteComment);
+
+//#Location Endpoint
+app.post('api/locate', locCtrl.postAddress);
 
 const port= SERVER_PORT;
 app.listen(port, ()=>console.log(`Server listening on port ${port}`))

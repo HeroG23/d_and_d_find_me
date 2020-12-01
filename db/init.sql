@@ -9,7 +9,7 @@ CREATE TABLE users(
 CREATE TABLE posts(
     post_id SERIAL PRIMARY KEY,
     title VARCHAR(40),
-    post_url TEXT,
+    post_address TEXT,
     content TEXT,
     user_id INT REFERENCES user(user_id)   
 );
@@ -26,7 +26,7 @@ VALUES
 ('antimatter@yahoo.com', 'giantslayer2414', welcome, false, true),
 ('necromancer@aol.com', 'darkusurper', goodbye, false, false);
 
-INSERT INTO posts(title, post_url, content, user_id)
+INSERT INTO posts(title, post_address, content, user_id)
 VALUES
 ('Dragon Slaying', '', 'Killing dragons is hard', 1),
 ('Killing giants is fun', '', 'Giants horde everything', 2),
