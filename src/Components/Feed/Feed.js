@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import Posts from '../Posts/Posts';
 import {connect} from 'react-redux';
-import './Feed.scss'
+import './Feed.css'
 
 const Feed = () => {
     const [search, setSearch] = useState(""); 

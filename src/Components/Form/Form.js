@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import {useHistory} from 'react-router-dom'
 import {useState, useEffect} from 'react';
-import "./Form.scss";
+import "./Form.css";
 
 function Form(props) {
     const [state, setState] = useState({

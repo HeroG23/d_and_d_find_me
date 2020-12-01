@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from "react-redux";
 import { logout } from "../../redux/userReducer";
-import "./Header.scss";
+import "./Header.css";
 
 function Header(username, logout) {
   return (
