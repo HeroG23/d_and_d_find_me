@@ -1,9 +1,10 @@
-import { Switch } from "react-router-dom";
 
 const initialState = {
-    posts: []
+    posts: [],
+    post: []
 };
 const SET_POSTS = "SET_POSTS";
+const SET_POST ="SET_POST"
 
 export function setPosts(posts){
     return{
@@ -12,10 +13,19 @@ export function setPosts(posts){
     }
 }
 
+export function setPost(post){
+    return{
+        type: SET_POST,
+        payload: post
+    }
+}
+
 export default function reducer(state = initialState, action){
     switch (action.type){
         case SET_POSTS:
             return {...state, posts: action.payload};
+        case SET_POST:
+            return {...state, post: action.payload};
         default:
             return state;
     }

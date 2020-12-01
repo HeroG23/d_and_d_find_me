@@ -1,29 +1,23 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import {setPosts} from '../../redux/postReducer';
+import {setPost} from '../../redux/postReducer';
 import {connect} from 'react-redux'
 
-const Posts = (props) => {
-
-  const [title, setTitle] = useState(props.post.title);
-  const [content, setContent] = useState(props.post.content);
-  const [location, setLocation] = useState(props.post.post_address);
-  const [author, setAuthor] = useState(props.user.username);
+const Posts = ({match, post: {title, content, post_address}, user: {username}}) => {
   const [loading, setLoading] = useState(true)
-  
-  
   
    useEffect(() => {
      const getPost = async () =>{
        try{ 
-         const post = await axios.get(`/api/posts/${props.match.params.id}`)
-         setPosts(post.data)
+         const post = await axios.get(`/api/posts/${match.params.id}`)
+         setPost(post.data)
+         setLoading(false)
        } catch (err){
          alert(err)
        }
      }
      getPost()
-   });
+   }, []);
 
   return (
     <div className="Posts content-box">
@@ -32,13 +26,13 @@ const Posts = (props) => {
           <div className="post-header">
             <h2 className="title"> {title}</h2>
             <div className="author-box">
-              <p>by {author}</p>
+              <p>by {username}</p>
             </div>
           </div>
           <div className="post-content">
             <p>{content}</p>
             <br/>
-            <p>{location}</p>
+            <p>{post_address}</p>
           </div>
         </div>
       ) : (
@@ -53,4 +47,4 @@ const Posts = (props) => {
 };
 
 const mapStateToProps = state => state
-export default connect(mapStateToProps, {setPosts})(Posts)
+export default connect(mapStateToProps, {setPost})(Posts)
