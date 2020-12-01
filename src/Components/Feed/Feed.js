@@ -18,9 +18,9 @@ const Feed = (props) => {
         getPosts();
     }, []);
 
-    const updatePost = async (id, postUrl,content) => {
+    const updatePost = async (id, postAddress,content) => {
         try {
-            const res = await axios.put(`/api/posts/${id}`, {postUrl, content});
+            const res = await axios.put(`/api/posts/${id}`, {postAddress, content});
             setPosts(res.data);
         } catch (err) {
             alert(err.response.request.response)
@@ -42,4 +42,6 @@ const Feed = (props) => {
     )
 }
 
-export default connect((reduxState) => reduxState)(Feed)
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps)(Feed)

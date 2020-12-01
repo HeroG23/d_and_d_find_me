@@ -40,7 +40,7 @@ app.get('/api/user', checkUser, userCtrl.getUser);
 app.put('/auth/user', checkUser, userCtrl.editUser);
 app.post('/auth/login', userCtrl.login);
 app.post('/auth/register', userCtrl.register);
-app.delete('/auth/logout', userCtrl.logout);
+app.post('/auth/logout', userCtrl.logout);
 
 //# Post Endpoints
 app.get('/api/posts', postCtrl.checkPosts);

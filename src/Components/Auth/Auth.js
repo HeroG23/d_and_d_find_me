@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/reducer";
+import { getUser } from "../../redux/userReducer";
 import axios from "axios";
 import AuthForm from "./AuthForm/AuthForm";
 import "./Auth.css";
@@ -28,7 +28,6 @@ const Auth = ({ getUser }) => {
           : { email, username, password, dm, online }
       );
       getUser(user.data);
-
       history.push("/feed");
     } catch (err) {
       console.log(err);

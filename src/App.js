@@ -3,7 +3,7 @@ import Header from './Components/Header/Header'
 import routes from './routes'
 import {useLocation} from 'react-router-dom'
 
-function App() {
+const App = () =>{
   const location = useLocation()
   return (
     <div className="App">

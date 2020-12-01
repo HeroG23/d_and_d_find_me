@@ -6,7 +6,7 @@ module.exports = {
     const { lat, lon } = req.body;
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lon}&radius=48280&type=gamestore&keyword=dungeonsanddragons%20games&key=${REACT_APP_API_KEY}`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/js?location=${lat},${lon}&radius=48280&type=gamestore&keyword=dungeons%20games&key=${REACT_APP_API_KEY}`
       )
       .then((res) => {
         res.status(200).send(res.data);
