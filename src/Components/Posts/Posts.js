@@ -8,7 +8,7 @@ const Posts = (props) => {
   const [content, setContent] = useState(props.post.content);
   const [location, setLocation] = useState(props.post.post_address);
   const [author, setAuthor] = useState(props.user.username);
-  const [loading] = useState(true)
+  const [loading, setLoading] = useState(true)
   
   
   
