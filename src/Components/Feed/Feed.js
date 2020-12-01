@@ -20,7 +20,7 @@ const Feed = () => {
         getPosts();
     }, [search]);
     //#post functions
-    const updatePost = async (id, postAddress,content) => {
+    const updatePost = async ([id, postAddress,content]) => {
         try {
             const res = await axios.put(`/api/posts/${id}`, {postAddress, content});
             setPosts(res.data);
