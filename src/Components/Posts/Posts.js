@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import {setPosts} from '../../redux/postReducer';
+import {connect} from 'react-redux'
+import './Posts.scss'
 
 const Posts = (props) => {
 
@@ -22,7 +24,7 @@ const Posts = (props) => {
        }
      }
      getPost()
-   });
+   }, [title, content, location, author]);
 
   return (
     <div className="Posts content-box">
@@ -51,4 +53,5 @@ const Posts = (props) => {
   )
 };
 
-export default Posts
+const mapStateToProps = state => state
+export default connect(mapStateToProps, {setPosts})(Posts)

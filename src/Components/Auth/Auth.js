@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
 import AuthForm from "./AuthForm/AuthForm";
-import "./Auth.css";
+import "./Auth.scss";
 
 const Auth = ({ getUser }) => {
   const [state, setState] = useState({
