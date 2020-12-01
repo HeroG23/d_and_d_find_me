@@ -4,9 +4,9 @@ import Posts from '../Posts/Posts';
 import {connect} from 'react-redux';
 
 const Feed = () => {
-    let [search, setSearch] = useState(""); 
-    let [posts, setPosts] = useState([]);
-
+    const [search, setSearch] = useState(""); 
+    const [posts, setPosts] = useState([]);
+    //#recieving posts
     useEffect(()=> {
         const getPosts = async () => {
             try {
@@ -18,7 +18,7 @@ const Feed = () => {
         };
         getPosts();
     }, [search]);
-
+    //#post functions
     const updatePost = async (id, postAddress,content) => {
         try {
             const res = await axios.put(`/api/posts/${id}`, {postAddress, content});
