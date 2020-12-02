@@ -11,7 +11,7 @@ const AuthForm = ({state, entryFn, setState, setLoggingIn, loggingIn}) => {
     const dynamicArr = loggingIn ? inputsArr.splice(1, 2) : inputsArr
     const inputsMapped = dynamicArr.map(input => (
         <div className="auth-inputs" key={input.label}>
-            <label>{input.label}:</label>
+            <label>{input.label}: </label>
             {!input.checkBox ? <input name={input.label} type={input.type} placeholder={input.name} onChange={e => changeHandler(e)}/> 
             : <input type="checkbox" name={input.name} onClick={e => changeHandler(e)} /> }
         </div>

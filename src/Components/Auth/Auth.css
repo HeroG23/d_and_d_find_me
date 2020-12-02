@@ -1,3 +1,76 @@
 .Auth{
-    
+    background-image: url("https://github.com/Joe-Esgar/GAME_FNDR/blob/master/src/Components/Profile/map.jpg?raw=true");
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color:white;
+}
+
+.auth-form{
+    border-radius: 20px;
+    width: 35vw;
+    height: 55vh;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    padding: 20px;
+    background-color: rgba(128, 128, 128, 0.767);
+}
+
+.auth-form > h1 {
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.auth-form > h2 {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.auth-inputs{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    width: 55%;
+}
+
+.auth-inputs > label {
+    font-size: 20px;
+}
+
+.view-button{
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.534);
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100px;
+    width: 100px;
+    font-size: 20px;
+}
+
+.entry-button{
+   border-radius: 1px; 
+   background-color: rgba(0, 0, 0, 0.534);
+   color: white;
+   font-size: 25px;
+   border: none;
+   width: 100px;
+   height: 50px;
 }
