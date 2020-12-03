@@ -1,37 +1,26 @@
 header{
-    width: 100px;
-    height: 20vh;
     position: fixed;
     top: 0;
-    right:0;
-    background-color: rgb(143, 38, 38);
-    color: white
-}
-
-.Profile-container{
-    height: 100px;
-    display: -ms-flexbox;
+    right: 0;
     display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -ms-flex-align: center;
-    align-items: center;
-
+    flex-direction: row;
+    color: white;
+    border-radius: 20px;
+    border: 2px solid  black;
 }
 
-.Header > div{
-    margin: 10px
+header > .nav-links{
+    background-color: rgba(195, 238, 211, 0.685);
+    display: flex;
+    flex-direction: row;
 }
 
-header > a:link, a:visited {
-
-    background-color: white;
+header > .nav-links > a{
+  border-radius: 5px;
   color: black;
-  border: 2px solid green;
+  border: 2px solid rgb(23, 91, 122);
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
   }

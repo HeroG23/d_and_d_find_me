@@ -1,3 +1,9 @@
 .Feed{
-    background-image: url("https://github.com/Joe-Esgar/GAME_FNDR/blob/master/src/Components/Profile/map.jpg?raw=true");
+    width: 50%;
+    background-color: transparent;
+}
+
+.feed-header > h1{
+      background-color: rgba(255, 255, 255, 0.452); 
+      width: 20%;
 }

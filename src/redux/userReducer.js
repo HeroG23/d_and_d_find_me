@@ -21,7 +21,7 @@ export default function reducer(state = initialState, action){
     let {type, payload} = action;
     switch(type){
         case GET_USER:
-            return{...state, username: payload.username, dm: payload.dm, userId: payload.user_id};
+            return{...state, username: payload.username, dm: payload.dm, userId: payload.userId};
         case LOGOUT:
             return initialState;
         default:

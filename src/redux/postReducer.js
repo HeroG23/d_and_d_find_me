@@ -1,7 +1,7 @@
 
 const initialState = {
     posts: [],
-    post: []
+    post: {}
 };
 const SET_POSTS = "SET_POSTS";
 const SET_POST ="SET_POST"

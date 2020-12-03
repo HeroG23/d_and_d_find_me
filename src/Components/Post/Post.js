@@ -3,15 +3,13 @@ import { useState, useEffect } from "react";
 import {setPost} from '../../redux/postReducer';
 import {connect} from 'react-redux'
 
-const Posts = ({match, post: {title, content, post_address}, user: {username}}) => {
-  const [loading, setLoading] = useState(true)
-  
+const Post = ({match, posts: {post: {title, content, post_address}}, user: {username}}) => {
+
    useEffect(() => {
      const getPost = async () =>{
        try{ 
          const post = await axios.get(`/api/posts/${match.params.id}`)
          setPost(post.data)
-         setLoading(false)
        } catch (err){
          alert(err)
        }
@@ -21,7 +19,6 @@ const Posts = ({match, post: {title, content, post_address}, user: {username}}) 
 
   return (
     <div className="Posts content-box">
-      {!loading && title ? (
         <div>
           <div className="post-header">
             <h2 className="title"> {title}</h2>
@@ -35,16 +32,9 @@ const Posts = ({match, post: {title, content, post_address}, user: {username}}) 
             <p>{post_address}</p>
           </div>
         </div>
-      ) : (
-        <div className="loading-box">
-          <div className="loading-background"></div>
-          <div className="loading"></div>
-        </div>
-        )
-      }
     </div>
   )
-};
+}
 
 const mapStateToProps = state => state
-export default connect(mapStateToProps, {setPost})(Posts)
+export default connect(mapStateToProps, {setPost})(Post)

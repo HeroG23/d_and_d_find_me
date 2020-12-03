@@ -2,6 +2,7 @@
     width: 100vw;
     height: 100vh;
     background-image: url('https://cdnb.artstation.com/p/assets/images/images/018/743/873/large/jonathan-t-campfirew.jpg?1560533001');
+    background-size: 100%;
 }
 .content-box{
         border-radius: 2px;

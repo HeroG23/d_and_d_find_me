@@ -1,8 +1,12 @@
 module.exports = {
     checkPosts: async(req, res) => {
         const db = req.app.get('db');
-        const posts = await db.posts.check_posts();
-        res.status(200).send(posts);
+        try {
+            const posts = await db.posts.check_posts();
+            res.status(200).send(posts);
+        } catch (err) {
+            console.log(err)
+        }
     },
     findPost: async(req, res) => {
         const db = req.app.get('db');
@@ -28,9 +32,9 @@ module.exports = {
     createPost: async(req, res) => {
         const db = req.app.get('db');
         const {title, content, post_url} = req.body;
-        const {user_id} = req.session.user;
+        const {userId} = req.session.user;
         try{
-            const post = await db.posts.create_post([title, content, post_url, user_id]);
+            const post = await db.posts.create_post([title, content, post_url, userId]);
             res.status(200).send(post)
         } catch(err) {
             console.log('Error occurred when trying to add post', err)

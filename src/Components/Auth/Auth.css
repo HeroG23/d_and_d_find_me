@@ -1,5 +1,6 @@
 .Auth{
-    background-image: url("https://github.com/Joe-Esgar/GAME_FNDR/blob/master/src/Components/Profile/map.jpg?raw=true");
+    background-image: url("https://preview.redd.it/227aufiss8h01.jpg?width=960&crop=smart&auto=webp&s=0a9d2c63ad55d7b522be42f858ab5ffc54a16c61");
+    background-size: 100%;
     height: 100vh;
     width: 100vw;
     position: absolute;
@@ -45,7 +46,6 @@
     display: flex;
     -ms-flex-pack: justify;
         justify-content: space-between;
-    width: 55%;
 }
 
 .auth-inputs > label {

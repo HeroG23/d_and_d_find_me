@@ -10,19 +10,19 @@ function Form(props) {
     postAddress: "",
   });
   const formArr = [
-    { label: "title", type: "text" },
-    { label: "content", type: "text" },
-    { label: "postAddress", type: "text" },
+    { label: "title" },
+    { label: "content" },
+    { label: "postAddress" },
   ];
 
   const changeHandle = (e) =>
     setState({ ...state, [e.target.name]: e.target.value });
+    
   const submit = (e) => {
     e.preventDefault();
-    const { userId } = props;
-    if (userId) {
+    if (props.user.username) {
       axios
-        .post("/api/posts", { ...state, userId })
+        .post("/api/posts", state)
         .then((res) => props.history.push("/feed"));
     } else {
       alert("Must be logged in to create posts");
@@ -33,8 +33,9 @@ function Form(props) {
     <div className="post-form" key={input.label}>
       <label>{input.label}: </label>
       <input
+        className="form-input"
         name={input.label}
-        type={input.type}
+        type="text"
         placeholder={input.label}
         onChange={(e) => changeHandle(e)}
       />
