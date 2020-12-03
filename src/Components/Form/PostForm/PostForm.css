@@ -1,4 +1,4 @@
-.Form {
+.PostForm {
   width: 70%;
   position: relative;
   left: 20%;
@@ -12,7 +12,7 @@
   border-radius: 5px;
 }
 
-.post-form {
+.post-input-form {
   width: 90%;
   height: 50px;
   display: -ms-flexbox;

@@ -18,8 +18,8 @@ module.exports = {
         const db = req.app.get('db');
         const {id} = req.params;
         const {post_id} = req.body;
-        const {user_id} = req.session.user;
-        const comments = await db.comments.find_comment_by_users_posts([+id, +post_id, +user_id])
+        const {userId} = req.session.user;
+        const comments = await db.comments.find_comment_by_users_posts([+id, +post_id, +userId])
         if(comments){
             res.status(200).send(comments)
         } else {
@@ -29,9 +29,9 @@ module.exports = {
     postComment: async(req, res) => {
         const db = req.app.get('db');
         const {body, post_id} = req.body
-        const {user_id} = req.session.user;
+        const {userId} = req.session.user;
         try {
-            const comment = await db.comments.post_comment([body, user_id, post_id]);
+            const comment = await db.comments.post_comment([body, userId, post_id]);
             res.status(200).send(comment)
         } catch(err){
             console.log('Error adding comment', err)

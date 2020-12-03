@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import "./Form.css";
 
-function Form(props) {
+function PostForm(props) {
   const [state, setState] = useState({
     title: "",
     content: "",
@@ -30,7 +30,7 @@ function Form(props) {
   };
 
   const formMapped = formArr.map((input) => (
-    <div className="post-form" key={input.label}>
+    <div className="post-input-form" key={input.label}>
       <label>{input.label}: </label>
       <input
         className="form-input"
@@ -43,7 +43,7 @@ function Form(props) {
   ));
 
   return (
-    <div className="Form content-box">
+    <div className="PostForm content-box">
       <form onSubmit={(e) => submit(e)}>
         <h2 className="title">New Post</h2>
         {formMapped}
@@ -60,4 +60,4 @@ function Form(props) {
   );
 }
 
-export default connect((state) => state)(Form);
+export default connect((state) => state)(PostForm);

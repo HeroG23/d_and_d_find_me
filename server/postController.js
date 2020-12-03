@@ -21,8 +21,8 @@ module.exports = {
     findPostsByUser: async(req,res) =>{
         const db = req.app.get('db')
         const {id} = req.params;
-        const {user_id} = req.session.user
-        const posts = await db.posts.find_posts_by_user([+id, user_id]);
+        const {userId} = req.session.user
+        const posts = await db.posts.find_posts_by_user([+id, userId]);
         if(posts){
             res.status(200).send(posts)
         } else {

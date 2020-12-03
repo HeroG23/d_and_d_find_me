@@ -1,6 +1,6 @@
 const initialState = {
     comments: [],
-    comment: []
+    comment: {}
 };
 
 const SET_COMMENTS = "SET_COMMENTS";

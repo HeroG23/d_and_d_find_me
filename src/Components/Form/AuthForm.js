@@ -1,3 +1,4 @@
+import '../Auth/Auth.css';
 
 const AuthForm = ({state, entryFn, setState, setLoggingIn, loggingIn}) => {
     const inputsArr = [

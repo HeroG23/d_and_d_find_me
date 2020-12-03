@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
-import AuthForm from "./AuthForm/AuthForm";
+import AuthForm from "../Form/AuthForm";
 import "./Auth.css";
 
 const Auth = ({ getUser }) => {
