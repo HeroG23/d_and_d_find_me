@@ -22,7 +22,7 @@ const Feed = () => {
       }
     }
     getPosts()
-  }, [])
+  }, [search])
   // //#post functions
 
   const updatePost = async ([id, postAddress, content]) => {
