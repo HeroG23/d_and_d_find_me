@@ -1,8 +1,14 @@
 module.exports = {
-    checkComments: async(req, res) => {
-        const db = req.app.get('db');
-        const comments = await db.comments.check_comments();
-        res.status(200).send(comments)
+    getComments: async (req, res) => {
+        const db = req.app.get('db')
+        const {postId} = req.params;
+        try {
+            const comments = await db.comments.check_comments(+postId)
+            res.status(200).send(comments)
+        } catch (err) {
+            console.log(err)
+            res.status(409).send('Could not locate user comments')
+        }
     },
     findComment: async(req, res) => {
         const db = req.app.get('db');
@@ -11,21 +17,21 @@ module.exports = {
         if(comment){
             res.status(200).send(comment)
         } else {
-            res.status(404).send('Could not locate the comment')
+            res.status(409).send('Could not locate the comment')
         }
     },
-    findCommentsByUsersPosts: async(req, res)=>{
-        const db = req.app.get('db');
-        const {id} = req.params;
-        const {post_id} = req.body;
-        const {userId} = req.session.user;
-        const comments = await db.comments.find_comment_by_users_posts([+id, +post_id, +userId])
-        if(comments){
-            res.status(200).send(comments)
-        } else {
-            res.status(404).send('Could not locate user comments')
-        }
-    },
+    // findCommentsByUsersPosts: async(req, res)=>{
+    //     const db = req.app.get('db');
+    //     const {id} = req.params;
+    //     const {post_id} = req.body;
+    //     const {userId} = req.session.user;
+    //     const comments = await db.comments.find_comment_by_users_posts([+id, +post_id, +userId])
+    //     if(comments){
+    //         res.status(200).send(comments)
+    //     } else {
+    //         res.status(409).send('Could not locate user comments')
+    //     }
+    // },
     postComment: async(req, res) => {
         const db = req.app.get('db');
         const {body, post_id} = req.body

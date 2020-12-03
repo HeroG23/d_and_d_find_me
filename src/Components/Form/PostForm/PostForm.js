@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
-import "./Form.css";
+import "./PostForm.css";
 
 function PostForm(props) {
   const [state, setState] = useState({

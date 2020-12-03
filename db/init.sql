@@ -32,9 +32,9 @@ VALUES
 ('Killing giants is fun', '', 'Giants horde everything', 2),
 ('Raiding graveyards', '', 'I love the bodies of the dead, is that weird?', 3);
 
-INSERT INTO comments(body, meet, user_id, post_id)
+INSERT INTO comments(body, user_id, post_id)
 VALUES
-('Killing dragons is super easy', 2, 1),
+('Killing dragons is super easy', 15, 64),
 ('If you use the undead it is easy', 2, 3),
 ('Giants just eat everything so there is nothing left', 1, 2),
 ('I hate giants they even eat my undead warriors', 3, 2),

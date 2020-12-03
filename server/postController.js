@@ -15,7 +15,7 @@ module.exports = {
         if (post){
             res.status(200).send(post)
         } else {
-            res.status(404).send('This is not the post you are looking for.')
+            res.status(409).send('This is not the post you are looking for.')
         }
     },
     findPostsByUser: async(req,res) =>{
@@ -26,7 +26,7 @@ module.exports = {
         if(posts){
             res.status(200).send(posts)
         } else {
-            res.status(404).send('You have made an error in judgement')
+            res.status(409).send('You have made an error in judgement')
         }
     },
     createPost: async(req, res) => {
@@ -50,7 +50,7 @@ module.exports = {
             res.status(200).send(post)
         }catch(err){
             console.log('Post could not be updated', err)
-            res.sendStatus(404)
+            res.sendStatus(409)
         }
     },
     deletePost: async(req, res) => {

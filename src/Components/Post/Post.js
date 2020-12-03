@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import {Link} from 'react-router-dom';
+import Comment from '../Comments/Comment'
 import { setPost } from "../../redux/postReducer";
 import {setComments} from '../../redux/commentReducer';
 import { connect } from "react-redux";
@@ -9,7 +11,7 @@ import '../Comments/Comments.css'
 const Post = ({
   match,
   posts: {
-    post: { title, content, post_address },
+    post: { post_id, title, content, post_address },
   },
   user: { username },
   deletePost,
@@ -21,7 +23,7 @@ const Post = ({
   useEffect(() => {
     const getComments = async () => {
       try {
-        const comments = await axios.get("/api/comments");
+        const comments = await axios.get(`/api/posts/comments/${post_id}`);
         setComments(comments.data);
         setCommentsState(comments.data);
       } catch (err) {

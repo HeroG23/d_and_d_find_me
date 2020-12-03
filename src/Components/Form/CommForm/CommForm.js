@@ -3,16 +3,17 @@ import axios from "axios";
 import { useState } from "react";
 import "./CommForm.css";
 
-function CommForm({ props, user: { username }, post: { post_id } }) {
+const CommForm = ({history, 
+  user: { username }, 
+  posts: {post: {post_id}}}) => {
   const [body, setBody] = useState("");
   
-
   const commSubmit = (e) => {
     e.preventDefault();
     if (username) {
       axios
         .post("/api/comments", {body, post_id})
-        .then((res) => props.history.push(`/post/${post_id}`));
+        .then((res) => history.push(`/posts/${post_id}`));
     } else {
       alert("Must be logged in to post a comment");
     }

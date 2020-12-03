@@ -9,20 +9,21 @@ import "./Feed.css";
 const Feed = () => {
   const [search, setSearch] = useState("");
   const [posts, setPostsState] = useState(undefined);
-  //#recieving posts
+  // //#recieving posts
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const posts = await axios.get("/api/posts");
-        setPosts(posts.data);
-        setPostsState(posts.data);
+        const posts = await axios.get("/api/posts")
+        console.log(posts.data)
+        setPosts(posts.data)
+        setPostsState(posts.data)
       } catch (err) {
-        alert(err);
+        console.log(err)
       }
-    };
-    getPosts();
-  }, [search]);
-  //#post functions
+    }
+    getPosts()
+  }, [])
+  // //#post functions
 
   const updatePost = async ([id, postAddress, content]) => {
     try {
@@ -35,6 +36,8 @@ const Feed = () => {
   const deletePost = async (post_id) => {
     await axios.delete(`/api/posts/${post_id}`);
   };
+
+  
 
   return (
     <div className="Feed content-box">
@@ -55,17 +58,19 @@ const Feed = () => {
             alt="loading gif"
           />
         ) : (
-          posts.map((posts) => (
-            <Link to={`/posts/${posts.post_id}`}>
-              <Post
-                key={posts.post_id}
-                posts={posts}
-                updatePost={updatePost}
-                deletePost={deletePost}
-              />
-            </Link>
-          ))
-        )}
+          <ul style={{listStyle: "none"}}>
+            {posts.map(post => (
+                <Link to={`/posts/${post.post_id}`}>
+                  <Post
+                    key={post.post_id}
+                    post={post}
+                    updatePost={updatePost}
+                    deletePost={deletePost}
+                  />
+                </Link>
+            ))}
+            </ul>
+          )}
       </main>
     </div>
   );
