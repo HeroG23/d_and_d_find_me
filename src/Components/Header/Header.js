@@ -10,7 +10,7 @@ function Header({user, logout}) {
         <Link className="home-nav" to="/feed">
           Home
         </Link>
-        <Link className="form-nav" to="/form">
+        <Link className="form-nav" to="/postform">
           Create New Post
         </Link>
         <Link className="profile-nav" to="/profile">

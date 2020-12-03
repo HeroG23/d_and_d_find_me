@@ -1,13 +1,13 @@
 module.exports = {
     getComments: async (req, res) => {
         const db = req.app.get('db')
-        const {postId} = req.params;
+        const {post_id} = req.params;
         try {
-            const comments = await db.comments.check_comments(+postId)
+            const comments = await db.comments.check_comments(+post_id)
             res.status(200).send(comments)
         } catch (err) {
             console.log(err)
-            res.status(409).send('Could not locate user comments')
+            res.status(401).send('Could not locate user comments')
         }
     },
     findComment: async(req, res) => {
@@ -17,7 +17,7 @@ module.exports = {
         if(comment){
             res.status(200).send(comment)
         } else {
-            res.status(409).send('Could not locate the comment')
+            res.status(402).send('Could not locate the comment')
         }
     },
     // findCommentsByUsersPosts: async(req, res)=>{
@@ -35,9 +35,9 @@ module.exports = {
     postComment: async(req, res) => {
         const db = req.app.get('db');
         const {body, post_id} = req.body
-        const {userId} = req.session.user;
+        const {user_id} = req.session.user;
         try {
-            const comment = await db.comments.post_comment([body, userId, post_id]);
+            const comment = await db.comments.post_comment([body, +user_id, +post_id]);
             res.status(200).send(comment)
         } catch(err){
             console.log('Error adding comment', err)
@@ -54,7 +54,7 @@ module.exports = {
             res.status(200).send(comment)
         } catch (err) {
             console.log('Can not update comment', err);
-            res.sendStatus(500);
+            res.sendStatus(501);
         }
     },
     deleteComment: async(req, res) => {
@@ -65,7 +65,7 @@ module.exports = {
             res.status(200).send(comment);
         } catch(err){
             console.log('Error deleting comment', err);
-            res.sendStatus(500);
+            res.sendStatus(502);
         }
     }
 }

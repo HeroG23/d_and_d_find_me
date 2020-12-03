@@ -5,7 +5,7 @@ module.exports = {
             const posts = await db.posts.check_posts();
             res.status(200).send(posts);
         } catch (err) {
-            console.log(err)
+            alert(err)
         }
     },
     findPost: async(req, res) => {
@@ -15,29 +15,30 @@ module.exports = {
         if (post){
             res.status(200).send(post)
         } else {
-            res.status(409).send('This is not the post you are looking for.')
+            res.status(403).send('This is not the post you are looking for.')
         }
     },
-    findPostsByUser: async(req,res) =>{
-        const db = req.app.get('db')
-        const {id} = req.params;
-        const {userId} = req.session.user
-        const posts = await db.posts.find_posts_by_user([+id, userId]);
-        if(posts){
-            res.status(200).send(posts)
-        } else {
-            res.status(409).send('You have made an error in judgement')
-        }
-    },
+    // findPostsByUser: async(req,res) =>{
+    //     const db = req.app.get('db')
+    //     const {id} = req.params;
+    //     const {user_id} = req.session.user;
+    //     const posts = await db.posts.find_posts_by_user([+id, user_id]);
+    //     if(posts){
+    //         res.status(200).send(posts)
+    //     } else {
+    //         res.status(405).send('You have made an error in judgement')
+    //     }
+    // },
     createPost: async(req, res) => {
         const db = req.app.get('db');
         const {title, content, post_url} = req.body;
-        const {userId} = req.session.user;
+        const {user_id} = req.session.user;
         try{
-            const post = await db.posts.create_post([title, content, post_url, userId]);
+            const post = await db.posts.create_post([title, content, post_url, user_id]);
             res.status(200).send(post)
         } catch(err) {
-            console.log('Error occurred when trying to add post', err)
+            alert(`Error occurred when trying to add post ${err}`)
+            res.sendStatus(406);
         }
     },
     updatePost: async(req, res) => {
@@ -50,7 +51,7 @@ module.exports = {
             res.status(200).send(post)
         }catch(err){
             console.log('Post could not be updated', err)
-            res.sendStatus(409)
+            res.sendStatus(407)
         }
     },
     deletePost: async(req, res) => {
@@ -62,7 +63,7 @@ module.exports = {
             res.status(200).send(post)
         } catch(err){
             console.log("Gourdn't delete this masterpiece", err);
-            res.sendStatus(500);
+            res.sendStatus(408);
         }
     }
 }

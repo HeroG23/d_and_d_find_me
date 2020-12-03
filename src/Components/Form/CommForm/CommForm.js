@@ -5,7 +5,7 @@ import "./CommForm.css";
 
 const CommForm = ({history, 
   user: { username }, 
-  posts: {post: {post_id}}}) => {
+  posts:{post: {post_id}}}) => {
   const [body, setBody] = useState("");
   
   const commSubmit = (e) => {

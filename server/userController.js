@@ -7,8 +7,8 @@ module.exports = {
     editUser: async (req, res) => {
         const db = req.app.get('db');
         const {dm} = req.body;
-        const {userId} = req.session.user;
-        const [updatedUser] = await db.auth.edit_user([userId, dm]);
+        const {user_id} = req.session.user;
+        const [updatedUser] = await db.auth.edit_user([user_id, dm]);
 
         req.session.user = updatedUser;
         res.status(200).send(req.session.user)
@@ -27,16 +27,16 @@ module.exports = {
                 if(authenticate) {
                     delete foundUser.password;
                     req.session.user = {
-                        userId: foundUser.user_id,
+                        user_id: foundUser.user_id,
                         username: foundUser.username,
                         dm: foundUser.dm
                     };
                     res.status(200).send(req.session.user);
                 }else {
-                    res.status(409).send('Username or password incorrect');
+                    res.status(503).send('Username or password incorrect');
                 }
             }else {
-                res.status(409).send('Username or password incorrect');
+                res.status(504).send('Username or password incorrect');
             }
         }catch(err){
             console.log('Database error on login function', err)
@@ -52,13 +52,13 @@ module.exports = {
         try {
             const [foundUser] = await db.auth.check_email(email)
             if(foundUser){
-                res.status(409).send('User already exists');
+                res.status(505).send('User already exists');
             }else{
                 const salt = bcrypt.genSaltSync(10);
                 const hash = bcrypt.hashSync(password, salt);
                 let [newUser] = await db.auth.check_user(username)
                 if(newUser){
-                    res.status(409).send('username already used')
+                    res.status(506).send('username already used')
                 } else {
                     newUser = await db.auth.create_user([email, username, hash, dm, online]);
                     req.session.user = newUser;
@@ -67,7 +67,7 @@ module.exports = {
             }
         }catch (err){
             console.log('Database error with register function', err)
-            res.sendStatus(500)
+            res.sendStatus(507)
         }
     },
     logout: (req, res) => {

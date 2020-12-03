@@ -30,7 +30,7 @@ function PostForm(props) {
   };
 
   const formMapped = formArr.map((input) => (
-    <div className="post-input-form" key={input.label}>
+    <div className="post-form" key={input.label}>
       <label>{input.label}: </label>
       <input
         className="form-input"
@@ -60,4 +60,6 @@ function PostForm(props) {
   );
 }
 
-export default connect((state) => state)(PostForm);
+const mapStateToProps= state => state;
+
+export default connect(mapStateToProps)(PostForm);

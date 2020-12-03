@@ -18,7 +18,7 @@ const Feed = () => {
         setPosts(posts.data)
         setPostsState(posts.data)
       } catch (err) {
-        console.log(err)
+        alert('Feed problems', err)
       }
     }
     getPosts()
@@ -60,7 +60,7 @@ const Feed = () => {
         ) : (
           <ul style={{listStyle: "none"}}>
             {posts.map(post => (
-                <Link to={`/posts/${post.post_id}`}>
+                <li><Link to={`/posts/${post.post_id}`}>
                   <Post
                     key={post.post_id}
                     post={post}
@@ -68,6 +68,7 @@ const Feed = () => {
                     deletePost={deletePost}
                   />
                 </Link>
+            </li>
             ))}
             </ul>
           )}
