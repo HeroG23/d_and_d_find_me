@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
+import {Link} from 'react-router-dom'
 import "./PostForm.css";
 
 function PostForm(props) {
@@ -30,7 +31,7 @@ function PostForm(props) {
   };
 
   const formMapped = formArr.map((input) => (
-    <div className="post-form" key={input.label}>
+    <div className="post-input" key={input.label}>
       <label>{input.label}: </label>
       <input
         className="form-input"
@@ -44,7 +45,7 @@ function PostForm(props) {
 
   return (
     <div className="PostForm content-box">
-      <form onSubmit={(e) => submit(e)}>
+      <form className="post-form" onSubmit={(e) => submit(e)}>
         <h2 className="title">New Post</h2>
         {formMapped}
         <div className="form-buttons">
@@ -52,7 +53,9 @@ function PostForm(props) {
             Submit Post!
           </button>
           <button className="form-button" type="reset">
+            <Link style={{textDecoration: "none"}} to="/feed">
             Cancel Post!
+            </Link>
           </button>
         </div>
       </form>

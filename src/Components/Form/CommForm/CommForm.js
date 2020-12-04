@@ -21,11 +21,12 @@ const CommForm = ({history,
 
   return (
     <div className="CommForm content-box">
-      <form onSubmit={(e) => commSubmit(e)}>
-        <h2>{username}</h2>
-        <div className="comm-input-form">
+      <form className="comm-form" onSubmit={(e) => commSubmit(e)}>
+        <h2 className="title">{username}</h2>
+        <div className="comm-input">
+          <label>Body: </label>
           <input
-            className="comm-input"
+            className="form-input"
             name="body"
             type="text"
             placeholder="Body"

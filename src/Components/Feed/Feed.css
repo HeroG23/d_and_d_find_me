@@ -1,11 +1,12 @@
 .Feed{
     width: 100%;
     height: 100%;
-    background-color: transparent;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     justify-content: space-evenly;
+    background-image: url('https://cdnb.artstation.com/p/assets/images/images/018/743/873/large/jonathan-t-campfirew.jpg?1560533001');
 }
 
 .feed-header > h1{

@@ -18,26 +18,11 @@ const Feed = () => {
         setPosts(posts.data)
         setPostsState(posts.data)
       } catch (err) {
-        alert('Feed problems', err)
+        // alert('Feed problems', err)
       }
     }
     getPosts()
   }, [search])
-  // //#post functions
-
-  const updatePost = async ([id, postAddress, content]) => {
-    try {
-      const res = await axios.put(`/api/posts/${id}`, { postAddress, content });
-      setPosts(res.data);
-    } catch (err) {
-      alert(err.response.request.response);
-    }
-  };
-  const deletePost = async (post_id) => {
-    await axios.delete(`/api/posts/${post_id}`);
-  };
-
-  
 
   return (
     <div className="Feed content-box">
@@ -60,12 +45,10 @@ const Feed = () => {
         ) : (
           <ul style={{listStyle: "none"}}>
             {posts.map(post => (
-                <li><Link to={`/posts/${post.post_id}`}>
+                <li><Link style={{textDecoration: "none"}} to={`/posts/${post.post_id}`}>
                   <Post
                     key={post.post_id}
                     post={post}
-                    updatePost={updatePost}
-                    deletePost={deletePost}
                   />
                 </Link>
             </li>

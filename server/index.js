@@ -52,7 +52,7 @@ app.delete('/api/posts/:id', checkUser, postCtrl.deletePost);
 
 //#Comment Endpoints
 app.get('/api/comments/:id', commCtrl.findComment);
-app.get('/api/posts/comments/:postId', commCtrl.getComments);
+app.get('/api/posts/comments/:post_id', commCtrl.getComments);
 // app.get('/api/comments/:userid/:id', commCtrl.findCommentsByUsersPosts);
 app.post('/api/comments', checkUser, commCtrl.postComment);
 app.put('/api/comments/:id', checkUser, commCtrl.updateComment);

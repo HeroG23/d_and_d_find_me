@@ -1,40 +1,56 @@
 import axios from "axios";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { setComment } from "../../redux/commentReducer";
+// import { setComment } from "../../redux/commentReducer";
 
-const Comment = ({
-  comment: { body, username, user_id, comment_id },
-  currentUserId,
-  updateComment,
-  deleteComment,
-}) => {
+const Comment = (props) => {
   const [edit, setEdit] = useState(false);
-  const [newComment, setNewComment] = useState(body);
+  const [comment, setComment] = useState({id: null, body: "", postId: "", userId: ""});
+  const [body, setBody] = useState("")
 
   useEffect(() => {
     const getComment = async () => {
       try {
-        const comment = await axios.get(`/api/comments/${comment_id}`);
-        setComment(comment.data);
+        const comment = await axios.get(`/api/comments/${props.match.params.id}`);
+        setComment({id: comment.comment_id, body: comment.body, postId: props.post.post_id, userId: props.user.user_id});
+        setBody(comment.body)
       } catch(err){
           alert('Comment problems', err);
       }
     };
     getComment();
-  }, [comment_id]);
+  }, []);
+
+  const updateComment = async (body) => {
+    try {
+      const res = await axios.put(`api/comments/${props.match.params.id}`, {body});
+      console.log(res.data)
+      setComment(res.data);
+      setBody(res.data)
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  const deleteComment = async () => {
+    await axios.delete(`/api/comments/${comment.comment_id}`);
+  };
+
   return (
     <div className="Comment content-box">
       <div>
         <div className="comment-header">
-          <h2>{username}</h2>
+          <h2>{props.user.username}</h2>
         </div>
       </div>
-      {currentUserId === user_id && edit ? (
-        <form onSubmit={() => updateComment(comment_id)}>
+      { props.user.user_id && edit ? (
+        <form onSubmit={() => updateComment(comment.body)}>
           <input
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
+            value={comment.body}
+            onChange={(e) => setComment(
+            {...comment,
+              body :e.target.value}
+            )}
           />
           <button type="submit">Save</button>
           <button type="reset" onClick={() => setEdit(!edit)}>
@@ -46,10 +62,10 @@ const Comment = ({
           <p>{body}</p>
         </div>
       )}
-      {currentUserId === user_id && !edit ? (
+      { props.user.user_id && !edit ? (
         <div>
           <button onClick={() => setEdit(!edit)}>Edit</button>
-          <button onClick={() => deleteComment(comment_id)}>
+          <button onClick={() => deleteComment(comment.comment_id)}>
             Delete Comment
           </button>
         </div>
@@ -59,4 +75,4 @@ const Comment = ({
 };
 
 const mapStateToProps = state => state
-export default connect(mapStateToProps, {setComment})(Comment);
+export default connect(mapStateToProps)(Comment);
