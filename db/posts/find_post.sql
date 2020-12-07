@@ -1,5 +1,4 @@
-SELECT p*, u.username
-FROM posts p
+SELECT p*, u.* FROM posts p
 JOIN users u ON u.user_id = p.user_id
 WHERE post_id = $1
 
