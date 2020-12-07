@@ -45,14 +45,24 @@ const Post = (props) => {
     getComments();
   }, []);
 
-  const updatePost = async ([id, postAddress, content]) => {
+  const updatePostContent = async ([id, content]) => {
     try {
-      const res = await axios.put(`/api/posts/${id}`, { postAddress, content });
+      const res = await axios.put(`/api/posts/${id}`, {  content });
       setPostState(res.data);
     } catch (err) {
-      alert(err.response.request.response);
+      alert(`Couldn't update post content`, err);
     }
   };
+
+  const updatePostAddress = async([id, post_address]) => {
+    try{
+      const res = await axios.put(`/api/posts/${id}`, {post_address});
+      setPostState(res.data);
+    } catch (err){
+      alert(`Couldn't update post address`, err)
+    }
+  };
+  
   const deletePost = async (id) => {
     await axios.delete(`/api/posts/${id}`);
   };
