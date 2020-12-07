@@ -13,16 +13,16 @@ const Feed = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const posts = await axios.get("/api/posts")
-        console.log(posts.data)
-        setPosts(posts.data)
-        setPostsState(posts.data)
+        const posts = await axios.get("/api/posts");
+        console.log(posts.data);
+        setPosts(posts.data);
+        setPostsState(posts.data);
       } catch (err) {
         // alert('Feed problems', err)
       }
-    }
-    getPosts()
-  }, [search])
+    };
+    getPosts();
+  }, [search]);
 
   return (
     <div className="Feed content-box">
@@ -43,18 +43,19 @@ const Feed = () => {
             alt="loading gif"
           />
         ) : (
-          <ul style={{listStyle: "none"}}>
-            {posts.map(post => (
-                <li><Link style={{textDecoration: "none"}} to={`/posts/${post.post_id}`}>
-                  <Post
-                    key={post.post_id}
-                    post={post}
-                  />
+          <ul style={{ listStyle: "none" }}>
+            {posts.map((post) => (
+              <li>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={`/posts/${post.post_id}`}
+                >
+                  <Post key={post.post_id} post={post} />
                 </Link>
-            </li>
+              </li>
             ))}
-            </ul>
-          )}
+          </ul>
+        )}
       </main>
     </div>
   );

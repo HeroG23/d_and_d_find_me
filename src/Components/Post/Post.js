@@ -53,8 +53,8 @@ const Post = (props) => {
       alert(err.response.request.response);
     }
   };
-  const deletePost = async (post_id) => {
-    await axios.delete(`/api/posts/${post_id}`);
+  const deletePost = async (id) => {
+    await axios.delete(`/api/posts/${id}`);
   };
 
   return (
