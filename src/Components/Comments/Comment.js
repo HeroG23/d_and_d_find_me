@@ -21,9 +21,9 @@ const Comment = (props) => {
     getComment();
   }, []);
 
-  const updateComment = async (body) => {
+  const updateComment = async ([id, body]) => {
     try {
-      const res = await axios.put(`api/comments/${props.match.params.id}`, {body});
+      const res = await axios.put(`api/comments/${id}`, {body});
       console.log(res.data)
       setComment(res.data);
       setBody(res.data)
@@ -32,8 +32,8 @@ const Comment = (props) => {
     }
   };
 
-  const deleteComment = async () => {
-    await axios.delete(`/api/comments/${props.match.params.id}`);
+  const deleteComment = async (id) => {
+    await axios.delete(`/api/comments/${id}`);
   };
 
   return (
