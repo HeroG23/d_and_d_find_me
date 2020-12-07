@@ -2,8 +2,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Comment from "../Comments/Comment";
-// import { setPost } from "../../redux/postReducer";
-// import { setComments } from "../../redux/commentReducer";
+import { setPost } from "../../redux/postReducer";
+import { setComments } from "../../redux/commentReducer";
 import { connect } from "react-redux";
 import "./Post.css";
 import "../Comments/Comments.css";
@@ -36,7 +36,7 @@ const Post = (props) => {
         const comments = await axios.get(
           `/api/posts/comments/${props.match.params.id}`
         );
-        // setComments(comments.data);
+        setComments(comments.data);
         setCommentsState(comments.data);
       } catch (err) {
         // alert("Post-comment problems", err);
@@ -48,6 +48,7 @@ const Post = (props) => {
   const updatePostContent = async ([id, content]) => {
     try {
       const res = await axios.put(`/api/posts/${id}`, {  content });
+      setPost(res.data)
       setPostState(res.data);
     } catch (err) {
       alert(`Couldn't update post content`, err);
@@ -95,12 +96,14 @@ const Post = (props) => {
           </div>
         ) : (
           <ul style={{ listStyle: "none" }}>
-            {comments.map((comment) => (
+            {comments.map((comment, post) => (
               <li>
                 <Link style={{textDecoration: "none"}}to={`/comments/${comment.comment_id}`}>
                   <Comment
                     key={comment.comment_id}
                     comment={comment}
+                    post={post}
+                    user={props.user}
                   />
                 </Link>
               </li>
@@ -114,4 +117,4 @@ const Post = (props) => {
 };
 
 const mapStateToProps = (state) => state;
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, {setPost, setComments})(Post);

@@ -20,10 +20,10 @@ module.exports = {
             res.status(402).send('Could not locate the comment')
         }
     },
-    getCommentsByUsers: async(req, res)=>{
+    findCommentsByUsers: async(req, res)=>{
         const db = req.app.get('db');
-        const {user_id} = req.session.user;
-        const comments = await db.comments.get_user_comments([+user_id])
+        const {userId} = req.session.user;
+        const comments = await db.comments.get_user_comments([+userId])
         if(comments){
             res.status(200).send(comments)
         } else {
