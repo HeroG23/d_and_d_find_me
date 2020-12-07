@@ -10,7 +10,7 @@ import "../Comments/Comments.css";
 
 const Post = (props) => {
   const [comments, setCommentsState] = useState(undefined);
-  const [post, setPostState] = useState({});
+  const [post, setPostState] = useState({id: null, title: "", content: "", address:""});
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
