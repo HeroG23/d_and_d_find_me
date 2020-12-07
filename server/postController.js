@@ -10,8 +10,8 @@ module.exports = {
     },
     findPost: async(req, res) => {
         const db = req.app.get('db');
-        const {post_id} = req.params;
-        const [post] = await db.posts.find_post(+post_id);
+        const {id} = req.params;
+        const [post] = await db.posts.find_post(+id);
         if (post){
             res.status(200).send(post)
         } else {
@@ -42,11 +42,11 @@ module.exports = {
     },
     updatePost: async(req, res) => {
         const db = req.app.get('db');
-        const {post_id} = req.params;
+        const {id} = req.params;
         const {content, post_url} = req.body;
 
         try{
-            const post = await db.posts.update_post([+post_id, content, post_url]);
+            const post = await db.posts.update_post([+id, content, post_url]);
             res.status(200).send(post)
         }catch(err){
             console.log('Post could not be updated', err)
@@ -55,10 +55,10 @@ module.exports = {
     },
     deletePost: async(req, res) => {
         const db = req.app.get('db');
-        const {post_id} = req.params;
+        const {id} = req.params;
 
         try{
-            const post = await db.posts.delete_post(+post_id);
+            const post = await db.posts.delete_post(+id);
             res.status(200).send(post)
         } catch(err){
             console.log("Gourdn't delete this masterpiece", err);

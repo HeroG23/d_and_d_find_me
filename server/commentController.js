@@ -12,8 +12,8 @@ module.exports = {
     },
     findComment: async(req, res) => {
         const db = req.app.get('db');
-        const {comment_id} = req.params;
-        const [comment] = await db.comments.find_comment(+comment_id);
+        const {id} = req.params;
+        const [comment] = await db.comments.find_comment(+id);
         if(comment){
             res.status(200).send(comment)
         } else {
@@ -44,10 +44,10 @@ module.exports = {
     },
     updateComment: async(req, res) => {
         const db = req.app.get('db');
-        const { comment_id } = req.params;
+        const { id } = req.params;
         const {body} = req.body;
         try {
-            const comment = await db.comments.update_comment([+comment_id, body]);
+            const comment = await db.comments.update_comment([+id, body]);
             res.status(200).send(comment)
         } catch (err) {
             console.log('Can not update comment', err);
@@ -56,9 +56,9 @@ module.exports = {
     },
     deleteComment: async(req, res) => {
         const db = req.app.get('db');
-        const {comment_id} = req.params;
+        const {id} = req.params;
         try{
-            const comment = await db.comments.delete_comment(+comment_id);
+            const comment = await db.comments.delete_comment(+id);
             res.status(200).send(comment);
         } catch(err){
             console.log('Error deleting comment', err);
