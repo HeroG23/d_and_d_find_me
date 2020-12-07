@@ -27,7 +27,7 @@ const Feed = () => {
   return (
     <div className="Feed content-box">
       <div className="feed-header">
-        <h1>Find Your Adventure</h1>
+        <h1 style={{borderRadius: "10px"}}>Find Your Adventure</h1>
         <div className="search-container">
           <input
             type="search"
