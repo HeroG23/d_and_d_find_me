@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Comment from "../Comments/Comment";
 // import { setPost } from "../../redux/postReducer";
-import { setComments } from "../../redux/commentReducer";
+// import { setComments } from "../../redux/commentReducer";
 import { connect } from "react-redux";
 import "./Post.css";
 import "../Comments/Comments.css";
