@@ -14,7 +14,6 @@ export default (
         <Route exact path='/' component={Auth}/>
         <Route path='/feed' component={Feed}/>
         <Route path='/posts/:id' component={Post}/>
-        <Route path='/comments/:id' component={Comment}/>
         <Route path='/commform' component={CommForm}/>
         <Route path='/postform' component={PostForm}/>
         <Route path='/fun' component={FunStories}/>

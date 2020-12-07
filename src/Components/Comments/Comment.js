@@ -1,29 +1,29 @@
 import axios from "axios";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { setComment } from "../../redux/commentReducer";
+// import { setComment } from "../../redux/commentReducer";
 
 const Comment = (props) => {
   const [edit, setEdit] = useState(false);
-  const [comment, setCommentState] = useState({id: null, body: "", postId: "", userId: ""});
+  const [comment, setComment] = useState({id: null, body: "", postId: "", userId: ""});
   const [body, setBody] = useState("")
 
   useEffect(() => {
     const getComment = async () => {
       try {
         const comment = await axios.get(`/api/comments/${props.match.params.id}`);
-        setCommentState({id: comment.comment_id, body: comment.body, postId: props.post_id, userId: props.user.user_id});
+        setComment({id: comment.comment_id, body: comment.body, postId: props.post.post_id, userId: props.user.user_id});
         setBody(comment.body)
       } catch(err){
           alert('Comment problems', err);
       }
     };
     getComment();
-  }, [props.match.params.id, props.post_id, props.user.user_id]);
+  }, []);
 
-  const updateComment = async ([id, body]) => {
+  const updateComment = async (body) => {
     try {
-      const res = await axios.put(`api/comments/${id}`, {body});
+      const res = await axios.put(`api/comments/${props.match.params.id}`, {body});
       console.log(res.data)
       setComment(res.data);
       setBody(res.data)
@@ -32,8 +32,8 @@ const Comment = (props) => {
     }
   };
 
-  const deleteComment = async (id) => {
-    await axios.delete(`/api/comments/${id}`);
+  const deleteComment = async () => {
+    await axios.delete(`/api/comments/${comment.comment_id}`);
   };
 
   return (
@@ -75,4 +75,4 @@ const Comment = (props) => {
 };
 
 const mapStateToProps = state => state
-export default connect(mapStateToProps, {setComment})(Comment);
+export default connect(mapStateToProps)(Comment);

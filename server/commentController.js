@@ -2,6 +2,7 @@ module.exports = {
     getComments: async (req, res) => {
         const db = req.app.get('db')
         const {post_id} = req.params;
+        console.log(post_id)
         try {
             const comments = await db.comments.check_comments(+post_id)
             res.status(200).send(comments)
@@ -22,8 +23,10 @@ module.exports = {
     },
     findCommentsByUsers: async(req, res)=>{
         const db = req.app.get('db');
+        const {id} = req.params;
+        const {post_id} = req.body;
         const {userId} = req.session.user;
-        const comments = await db.comments.get_user_comments([+userId])
+        const comments = await db.comments.get_user_comments([+id, +post_id, +userId])
         if(comments){
             res.status(200).send(comments)
         } else {

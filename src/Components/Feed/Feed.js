@@ -3,22 +3,20 @@ import axios from "axios";
 import Post from "../Post/Post";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { setPosts } from "../../redux/postReducer";
+// import { setPosts } from "../../redux/postReducer";
 import "./Feed.css";
 
 const Feed = () => {
   const [search, setSearch] = useState("");
-  const [posts, setPostsState] = useState(undefined);
+  const [posts, setPosts] = useState(undefined);
   // //#recieving posts
   useEffect(() => {
     const getPosts = async () => {
       try {
         const posts = await axios.get("/api/posts");
-        console.log(posts.data);
         setPosts(posts.data);
-        setPostsState(posts.data);
       } catch (err) {
-        // alert('Feed problems', err)
+        console.log('Feed problems', err)
       }
     };
     getPosts();
@@ -51,6 +49,8 @@ const Feed = () => {
                   to={`/posts/${post.post_id}`}
                 >
                   <Post key={post.post_id} post={post} />
+                <Link style={{textDecoration: "none"},
+              {backgroundColor: " rgba(255, 255, 255, 0.418)"}} to="/commform">Create Comment!</Link>
                 </Link>
               </li>
             ))}
@@ -63,4 +63,4 @@ const Feed = () => {
 
 const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps, { setPosts })(Feed);
+export default connect(mapStateToProps)(Feed);
