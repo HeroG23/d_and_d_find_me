@@ -10,25 +10,24 @@ module.exports = {
     },
     findPost: async(req, res) => {
         const db = req.app.get('db');
-        const {id} = req.params;
-        const [post] = await db.posts.find_post(+id);
+        const {post_id} = req.params;
+        const [post] = await db.posts.find_post(+post_id);
         if (post){
             res.status(200).send(post)
         } else {
             res.status(403).send('This is not the post you are looking for.')
         }
     },
-    // findPostsByUser: async(req,res) =>{
-    //     const db = req.app.get('db')
-    //     const {id} = req.params;
-    //     const {user_id} = req.session.user;
-    //     const posts = await db.posts.find_posts_by_user([+id, user_id]);
-    //     if(posts){
-    //         res.status(200).send(posts)
-    //     } else {
-    //         res.status(405).send('You have made an error in judgement')
-    //     }
-    // },
+    findPostsByUser: async(req,res) =>{
+        const db = req.app.get('db')
+        const {user_id} = req.session.user;
+        const posts = await db.posts.find_posts_by_user([user_id]);
+        if(posts){
+            res.status(200).send(posts)
+        } else {
+            res.status(405).send('You have made an error in judgement')
+        }
+    },
     createPost: async(req, res) => {
         const db = req.app.get('db');
         const {title, content, post_url} = req.body;
@@ -43,11 +42,11 @@ module.exports = {
     },
     updatePost: async(req, res) => {
         const db = req.app.get('db');
-        const {id} = req.params;
+        const {post_id} = req.params;
         const {content, post_url} = req.body;
 
         try{
-            const post = await db.posts.update_post([+id, content, post_url]);
+            const post = await db.posts.update_post([+post_id, content, post_url]);
             res.status(200).send(post)
         }catch(err){
             console.log('Post could not be updated', err)
@@ -56,10 +55,10 @@ module.exports = {
     },
     deletePost: async(req, res) => {
         const db = req.app.get('db');
-        const {id} = req.params;
+        const {post_id} = req.params;
 
         try{
-            const post = await db.posts.delete_post(+id);
+            const post = await db.posts.delete_post(+post_id);
             res.status(200).send(post)
         } catch(err){
             console.log("Gourdn't delete this masterpiece", err);
