@@ -33,7 +33,7 @@ const Comment = (props) => {
   };
 
   const deleteComment = async () => {
-    await axios.delete(`/api/comments/${comment.comment_id}`);
+    await axios.delete(`/api/comments/${props.match.params.id}`);
   };
 
   return (
