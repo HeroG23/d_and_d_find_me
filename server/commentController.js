@@ -2,7 +2,6 @@ module.exports = {
     getComments: async (req, res) => {
         const db = req.app.get('db')
         const {post_id} = req.params;
-        console.log(post_id)
         try {
             const comments = await db.comments.check_comments(+post_id)
             res.status(200).send(comments)

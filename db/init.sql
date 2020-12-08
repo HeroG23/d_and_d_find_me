@@ -1,5 +1,8 @@
 CREATE TABLE users(
     user_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    phone_number VARCHAR(20),
     email VARCHAR(40),
     username VARCHAR(40),
     password VARCHAR(60),
@@ -11,7 +14,7 @@ CREATE TABLE posts(
     title VARCHAR(40),
     post_address TEXT,
     content TEXT,
-    user_id INT REFERENCES user(user_id)   
+    user_id INT REFERENCES users(user_id)   
 );
 CREATE TABLE comments (
     comment_id SERIAL PRIMARY KEY,
@@ -25,9 +28,9 @@ CREATE TABLE comments (
 
 INSERT INTO users(email, username, password, dm, online)
 VALUES
-('bdgm@yahoo.com', 'bigdragon25', hello, true, false),
-('antimatter@yahoo.com', 'giantslayer2414', welcome, false, true),
-('necromancer@aol.com', 'darkusurper', goodbye, false, false);
+('John', 'Wall', '8615550123', 'bdgm@yahoo.com', 'bigdragon25', hello, true, false),
+('Missy', 'Elliot', '7889897877', 'antimatter@yahoo.com', 'giantslayer2414', welcome, false, true),
+('William', 'Shakespeare', '115641616', 'necromancer@aol.com', 'darkusurper', goodbye, false, false);
 
 INSERT INTO posts(title, post_address, content, user_id)
 VALUES
@@ -37,11 +40,12 @@ VALUES
 
 INSERT INTO comments(body, user_id, post_id)
 VALUES
-('Killing dragons is super easy NERDS, git good', 15, 64),
-('Killing dragons is super easy NERDS, git good', 13, 64),
-('my first comment :D',	15,	65),
-('Hello', 13, 65),
-('I am trying my best',	13,	67),
-('I am trying my best',	13,	67),
-('I am trying my best',	13,	66),
-('I am trying my best',	13,	66)
+('Killing dragons is super easy NERDS, git good', 1, 1),
+('Killing dragons is super easy NERDS, git good', 1, 2),
+('my first comment :D',	1,	3),
+('Hello', 1, 4),
+('I am trying my best',	1,	5),
+('I am trying my best',	1,	6),
+('I am trying my best',	1,	7),
+('I am trying my best',	1,	8),
+('my first comment :D',	1,	9)

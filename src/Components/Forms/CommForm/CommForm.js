@@ -1,19 +1,18 @@
 import axios from "axios";
 import { useState } from "react";
+import {connect} from "react-redux"
 import "./CommForm.css";
 
-const CommForm = ({history, 
-  user: { username}, 
-  post:{post_id}}) => {
+const CommForm = ({history, user, post}) => {
 
   const [body, setBody] = useState("");
   
   const commSubmit = (e) => {
     e.preventDefault();
-    if (username) {
+    if (user.username) {
       axios
-        .post("/api/comments", {body, post_id})
-        .then((res) => history.push(`/posts/${post_id}`));
+        .post("/api/comments", {body})
+        .then((res) => history.push(`/posts/${post.id}`));
     } else {
       alert("Must be logged in to post a comment");
     }
@@ -22,9 +21,9 @@ const CommForm = ({history,
   return (
     <div className="CommForm content-box">
       <form className="comm-form" onSubmit={(e) => commSubmit(e)}>
-        <h2 className="title">{username}</h2>
+        <h2 className="title">{user.username}</h2>
         <div className="comm-input">
-          <label>Body: </label>
+          <label> Comment: </label>
           <input
             className="form-input"
             name="body"
@@ -37,13 +36,12 @@ const CommForm = ({history,
           <button className="comm-button" type="submit">
             Post Comment!
           </button>
-          <button className="comm-button" type="reset">
-            Cancel Comment!
-          </button>
         </div>
       </form>
     </div>
   );
 }
 
-export default CommForm
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(CommForm)

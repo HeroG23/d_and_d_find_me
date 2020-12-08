@@ -45,7 +45,7 @@ app.post('/auth/logout', userCtrl.logout);
 //# Post Endpoints
 app.get('/api/posts', postCtrl.checkPosts);
 app.get('/api/posts/:id', postCtrl.findPost);
-app.get('/api/posts/:userid', postCtrl.findPostsByUser);
+app.get('/api/user/posts/:userid', postCtrl.findPostsByUser);
 app.post('/api/posts', checkUser, postCtrl.createPost);
 app.put('/api/posts/:id', checkUser, postCtrl.updatePost);
 app.delete('/api/posts/:id', checkUser, postCtrl.deletePost);
@@ -53,7 +53,7 @@ app.delete('/api/posts/:id', checkUser, postCtrl.deletePost);
 //#Comment Endpoints
 app.get('/api/comments/:id', commCtrl.findComment);
 app.get('/api/posts/comments/:post_id', commCtrl.getComments);
-app.get('/api/comments/:userid', commCtrl.findCommentsByUsers);
+app.get('/api/user/comments/:userid', commCtrl.findCommentsByUsers);
 app.post('/api/comments', checkUser, commCtrl.postComment);
 app.put('/api/comments/:id', checkUser, commCtrl.updateComment);
 app.delete('/api/comments/:id', checkUser, commCtrl.deleteComment);

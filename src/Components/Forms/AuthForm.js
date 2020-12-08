@@ -2,6 +2,9 @@ import '../Auth/Auth.css';
 
 const AuthForm = ({state, entryFn, setState, setLoggingIn, loggingIn}) => {
     const inputsArr = [
+        {label: "first_name", type: "text"},
+        {label: "last_name", type: "text"},
+        {label: "phone_number", type: "tel"},
         {label: "email", type: "email"},
         {label: "username", type: "text"},
         {label: "password", type: "password"},
@@ -9,7 +12,7 @@ const AuthForm = ({state, entryFn, setState, setLoggingIn, loggingIn}) => {
         {checkbox: true, name: "online", label: "online", type: "checkbox"}
     ]
 
-    const dynamicArr = loggingIn ? inputsArr.splice(1, 2) : inputsArr
+    const dynamicArr = loggingIn ? inputsArr.splice(4, 2) : inputsArr
     const inputsMapped = dynamicArr.map(input => (
         <div className="auth-inputs" key={input.label}>
             <label>{input.label}: </label>

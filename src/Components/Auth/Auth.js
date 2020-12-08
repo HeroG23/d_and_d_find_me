@@ -8,6 +8,9 @@ import "./Auth.css";
 
 const Auth = ({ getUser }) => {
   const [state, setState] = useState({
+    first_name: "",
+    last_name: "",
+    phone_number: "",
     email: "",
     username: "",
     password: "",
@@ -19,13 +22,13 @@ const Auth = ({ getUser }) => {
 
   const entryFn = async (e) => {
     e.preventDefault();
-    const { email, username, password, dm, online } = state;
+    const { first_name, last_name, phone_number, email, username, password, dm, online } = state;
     try {
       const user = await axios.post(
         `/auth/${loggingIn ? "login" : "register"}`,
         loggingIn
           ? { username, password }
-          : { email, username, password, dm, online }
+          : { first_name, last_name, phone_number, email, username, password, dm, online }
       );
       getUser(user.data);
       history.push("/feed");
