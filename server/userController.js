@@ -31,6 +31,7 @@ module.exports = {
             first_name: foundUser.first_name,
             last_name: foundUser.last_name,
             phone_number: foundUser.phone_number,
+            email: foundUser.email,
             username: foundUser.username,
             dm: foundUser.dm,
           };

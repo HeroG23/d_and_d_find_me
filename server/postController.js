@@ -58,8 +58,8 @@ module.exports = {
         const {id} = req.params;
 
         try{
-            const post = await db.posts.delete_post(+id);
-            res.status(200).send(post)
+            await db.posts.delete_post(+id);
+            res.sendStatus(200)
         } catch(err){
             console.log("Gourdn't delete this masterpiece", err);
             res.sendStatus(408);

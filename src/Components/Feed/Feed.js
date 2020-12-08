@@ -9,8 +9,8 @@ import "./Feed.css";
 const Feed = () => {
   const [search, setSearch] = useState("");
   const [posts, setPosts] = useState([]);
-  
-  // //#recieving posts
+
+  //#recieving posts
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -23,21 +23,6 @@ const Feed = () => {
     getPosts();
   }, [search]);
   
-  const updatePost = async (id, content, post_address) => {
-    try {
-      const res = await axios.put(`/api/posts/${id}`, {
-        content,
-        post_address,
-      });
-      setPosts(res.data);
-    } catch (err) {
-      alert(`Couldn't update post content`, err);
-    }
-  };
-
-  const deletePost = async (id) => {
-    await axios.delete(`/api/posts/${id}`);
-  };
 
   return (
     <div className="Feed content-box">
@@ -65,11 +50,7 @@ const Feed = () => {
                   style={{ textDecoration: "none" }}
                   to={`/posts/${post.post_id}`}
                 >
-                  <Post
-                    post={post}
-                    updatePost={updatePost}
-                    deletePost={deletePost}
-                  />
+                  <Post post={post} />
                 </Link>
               </li>
             ))}

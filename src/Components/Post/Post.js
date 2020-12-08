@@ -10,7 +10,6 @@ import "./Post.css";
 import "../Comments/Comments.css";
 import CommForm from "../Forms/CommForm/CommForm";
 
-
 const Post = (props) => {
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState(undefined);
@@ -20,34 +19,71 @@ const Post = (props) => {
   const updateComment = async (e, comment_id, body) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`api/comments/${comment_id}`, {body});
+      const res = await axios.put(`api/comments/${comment_id}`, { body });
       setComments(res.data);
     } catch (err) {
       alert(err);
     }
+  };
+
+  const deleteComment = async (comment_id) => {
+    await axios.delete(`/api/comments/${comment_id}`);
+  };
+
+  const updatePost = async (id, content, post_address) => {
+    try {
+      const res = await axios.put(`/api/posts/${id}`, {
+        content,
+        post_address,
+      });
+      setPost(res.data);
+    } catch (err) {
+      alert(`Couldn't update post content`, err);
+    }
+  };
+
+  const deletePost = async (id) => {
+    await axios.delete(`/api/posts/${id}`);
+    props.history.push("/feed")
   }
 
-  const deleteComment = async comment_id => {
-    await axios.delete(`/api/comments/${comment_id}`);
+  const onSubmitPressed = e => {
+    e.preventDefault()
+    setEdit(!edit);
+    updatePost(post.id, post.content, post.address);
   }
+
+  //# fix this
+  const commSubmit = async (e, body) => {
+    e.preventDefault();
+    if (props.user.username) {
+      await axios.post("/api/comments", {body, post_id: post.id})
+      setCreateComment(!createComment)
+    } else {
+      alert("Must be logged in to post a comment");
+    }
+  };
 
   useEffect(() => {
     if (props.match !== undefined) {
       const getPost = async () => {
         try {
           const post = await axios.get(`/api/posts/${props.match.params.id}`);
-          setPost({
-            id: post.data.post_id,
-            title: post.data.title,
-            username: post.data.username,
-            content: post.data.content,
-            address: post.data.post_address,
-            userId: post.data.user_id
-          });
+          // setPost({
+            //   id: post.data.post_id,
+            //   title: post.data.title,
+            //   username: post.data.username,
+            //   content: post.data.content,
+            //   address: post.data.post_address,
+            //   userId: post.data.user_id,
+            // });
+          //# OR
+          const {post_id: id, title, username, content, post_address: address, user_id: userId} = post.data
+          setPost({id, title, username, content, address, userId})
         } catch (err) {
           console.log(err);
         }
-      }
+      };
 
       const getComments = async () => {
         try {
@@ -59,16 +95,15 @@ const Post = (props) => {
           console.log(err);
         }
       };
-      
+
       getComments();
       getPost();
     } else {
       setPost(props.post);
     }
-  }, [deleteComment])
+  }, [commSubmit, props.match, props.post]);
 
   return (
-    
     <div className="Post content-box">
       {post === undefined ? (
         <div>Loading...</div>
@@ -76,47 +111,58 @@ const Post = (props) => {
         <div>
           <div>
             <div className="post-header">
-              <h2 className="title" style = {{fontSize: '24px'}}> {post.title}</h2>
+              <h2 className="title" style={{ fontSize: "24px" }}>
+                {post.title}
+              </h2>
               <div className="author-box">
                 <p>by {post.username}</p>
               </div>
             </div>
             {post.userId && edit ? (
-              <form onSubmit={e => {setEdit(!edit); props.updatePost(e, post.id, post.content)}}>
+              <form onSubmit={e => onSubmitPressed(e)}>
                 <input
-                  value={post.content} 
-                  onChange={e => setPost(e.target.value)}
-                  />
+                  value={post.content}
+                  onChange={(e) => setPost({...post, content: e.target.value})}
+                />
                 <input
                   value={post.address}
-                  onChange={e => setPost(e.target.value)}
+                  onChange={(e) => setPost({...post, address: e.target.value})}
                 />
-                  <button type="submit">Save Update</button>
-                  <button type="reset" onClick={()=> setEdit(!edit)}>
-                    Cancel Update
-                  </button>
+                <button type="submit">Save Update</button>
+                <button type="reset" onClick={() => setEdit(!edit)}>
+                  Cancel Update
+                </button>
               </form>
-            ): (
-            <div className="post-content">
-              <p style={{fontSize: "24x"}}>{post.content}</p>
-              <br />
-              <p>{post.post_address}</p>
-            </div>
+            ) : (
+              <div className="post-content">
+                <p style={{ fontSize: "24x" }}>{post.content}</p>
+                <br />
+                <p>{post.address}</p>
+              </div>
             )}
-            {post.userId && !edit? (
+            {post.userId && !edit ? (
               <div>
                 <button onClick={() => setEdit(!edit)}>Update Post</button>
-                <button onClick={() => props.deletePost(post.id)}>Delete Post</button>
+                <button onClick={() => deletePost(post.id)}>
+                  Delete Post
+                </button>
               </div>
-            ): null}
+            ) : null}
           </div>
           <div className="createComment">
-            {props.user.user_id && createComment ?
-            <div> 
-            <CommForm key = {post.post_id} post={post}/> <button onClick={() => setCreateComment(!createComment)}>Cancel Comment</button>
-            </div> : null}
-            {props.user.user_id && !createComment ?
-              <button onClick={() => setCreateComment(!createComment)}>Comment</button>: null}
+            {props.user.user_id && createComment ? (
+              <div>
+                <CommForm key={post.post_id} post={post} commSubmit={commSubmit}/>{" "}
+                <button onClick={() => setCreateComment(!createComment)}>
+                  Cancel Comment
+                </button>
+              </div>
+            ) : null}
+            {props.user.user_id && !createComment ? (
+              <button onClick={() => setCreateComment(!createComment)}>
+                Comment
+              </button>
+            ) : null}
           </div>
           <div className="Comments content-Box">
             {comments.length < 1 ? (
@@ -128,9 +174,13 @@ const Post = (props) => {
               </div>
             ) : (
               <ul style={{ listStyle: "none" }}>
-                {comments.map(comment => (
+                {comments.map((comment) => (
                   <li key={comment.comment_id}>
-                    <Comment comment={comment} updateComment={updateComment} deleteComment={deleteComment} />
+                    <Comment
+                      comment={comment}
+                      updateComment={updateComment}
+                      deleteComment={deleteComment}
+                    />
                   </li>
                 ))}
               </ul>
@@ -142,5 +192,5 @@ const Post = (props) => {
   );
 };
 
-const mapStateToProps = state => state
+const mapStateToProps = (state) => state;
 export default connect(mapStateToProps)(Post);
