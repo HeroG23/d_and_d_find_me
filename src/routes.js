@@ -3,9 +3,9 @@ import {Switch, Route} from 'react-router-dom';
 import Auth from './Components/Auth/Auth';
 import Feed from './Components/Feed/Feed';
 import Post from './Components/Post/Post';
-import PostForm from './Components/Form/PostForm/PostForm';
-import Comment from './Components/Comments/Comment';
-import CommForm from './Components/Form/CommForm/CommForm';
+import PostForm from './Components/Forms/PostForm/PostForm';
+// import Comment from './Components/Comments/Comment';
+import CommForm from './Components/Forms/CommForm/CommForm';
 import FunStories from './Components/FunStories/FunStories';
 import Profile from './Components/Profile/Profile';
 

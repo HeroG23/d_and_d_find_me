@@ -47,8 +47,7 @@ app.get('/api/posts', postCtrl.checkPosts);
 app.get('/api/posts/:id', postCtrl.findPost);
 app.get('/api/posts/:userid', postCtrl.findPostsByUser);
 app.post('/api/posts', checkUser, postCtrl.createPost);
-app.put('/api/posts/:id', checkUser, postCtrl.updatePostContent);
-app.put('/api/posts/:id', checkUser, postCtrl.updatePostAddress);
+app.put('/api/posts/:id', checkUser, postCtrl.updatePost);
 app.delete('/api/posts/:id', checkUser, postCtrl.deletePost);
 
 //#Comment Endpoints

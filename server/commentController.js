@@ -25,8 +25,8 @@ module.exports = {
         const db = req.app.get('db');
         const {id} = req.params;
         const {post_id} = req.body;
-        const {userId} = req.session.user;
-        const comments = await db.comments.get_user_comments([+id, +post_id, +userId])
+        const {user_id} = req.session.user;
+        const comments = await db.comments.get_user_comments([+id, +post_id, +user_id])
         if(comments){
             res.status(200).send(comments)
         } else {

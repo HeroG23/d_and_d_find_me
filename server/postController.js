@@ -40,26 +40,13 @@ module.exports = {
             res.sendStatus(406);
         }
     },
-    updatePostContent: async(req, res) => {
+    updatePost: async(req, res) => {
         const db = req.app.get('db');
         const {id} = req.params;
-        const {content} = req.body;
+        const {content, post_address} = req.body;
 
         try{
-            const post = await db.posts.update_post_content([+id, content]);
-            res.status(200).send(post)
-        }catch(err){
-            console.log('Post could not be updated', err)
-            res.sendStatus(407)
-        }
-    },
-    updatePostAddress: async(req, res) => {
-        const db = req.app.get('db');
-        const {id} = req.params;
-        const {post_address} = req.body;
-
-        try{
-            const post = await db.posts.update_post_address([+id, post_address]);
+            const post = await db.posts.update_post([+id, content, post_address]);
             res.status(200).send(post)
         }catch(err){
             console.log('Post could not be updated', err)

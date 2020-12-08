@@ -13,12 +13,15 @@ CREATE TABLE posts(
     content TEXT,
     user_id INT REFERENCES user(user_id)   
 );
-CREATE TABLE comments(
+CREATE TABLE comments (
     comment_id SERIAL PRIMARY KEY,
     body TEXT,
-    user_id INT FOREIGN KEY REFERENCES users(user_id),
-    post_id INT FOREIGN KEY REFERENCES posts(post_id)
+    user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
+    post_id INT REFERENCES posts(post_id) ON DELETE CASCADE
 );
+
+
+
 
 INSERT INTO users(email, username, password, dm, online)
 VALUES
@@ -34,9 +37,11 @@ VALUES
 
 INSERT INTO comments(body, user_id, post_id)
 VALUES
-('Killing dragons is super easy', 15, 64),
-('If you use the undead it is easy', 2, 3),
-('Giants just eat everything so there is nothing left', 1, 2),
-('I hate giants they even eat my undead warriors', 3, 2),
-('Could you stop bringing dragons back to life please?', 1, 3),
-('Giants love to kill your undead soldiers', 2, 3)
+('Killing dragons is super easy NERDS, git good', 15, 64),
+('Killing dragons is super easy NERDS, git good', 13, 64),
+('my first comment :D',	15,	65),
+('Hello', 13, 65),
+('I am trying my best',	13,	67),
+('I am trying my best',	13,	67),
+('I am trying my best',	13,	66),
+('I am trying my best',	13,	66)

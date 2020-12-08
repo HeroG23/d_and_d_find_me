@@ -1,11 +1,11 @@
-import { connect } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
 import "./CommForm.css";
 
 const CommForm = ({history, 
-  user: { username }, 
-  posts:{post: {post_id}}}) => {
+  user: { username}, 
+  post:{post_id}}) => {
+
   const [body, setBody] = useState("");
   
   const commSubmit = (e) => {
@@ -46,6 +46,4 @@ const CommForm = ({history,
   );
 }
 
-const mapStateToProps = (state) => state;
-
-export default connect(mapStateToProps)(CommForm);
+export default CommForm
