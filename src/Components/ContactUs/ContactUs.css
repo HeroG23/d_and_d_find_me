@@ -1,0 +1,21 @@
+.email-form {
+  width: 500;
+  height: 500;
+}
+
+.email-form > h1 {
+  font-size: 60;
+}
+
+button {
+  width: 200;
+  height: 45;
+  font-size: 35;
+}
+
+input{
+    width: 450;
+    height: 50;
+    font-size: 35;
+    outline: none;
+}

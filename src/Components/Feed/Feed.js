@@ -3,6 +3,7 @@ import axios from "axios";
 import Post from "../Post/Post";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Graph from '../Graph/Graph';
 // import { setPosts } from "../../redux/postReducer";
 import "./Feed.css";
 
@@ -56,6 +57,9 @@ const Feed = () => {
           </ul>
         )}
       </main>
+      <div>
+        <Graph/>
+      </div>
     </div>
   );
 };

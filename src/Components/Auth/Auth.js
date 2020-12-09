@@ -22,13 +22,31 @@ const Auth = ({ getUser }) => {
 
   const entryFn = async (e) => {
     e.preventDefault();
-    const { first_name, last_name, phone_number, email, username, password, dm, online } = state;
+    const {
+      first_name,
+      last_name,
+      phone_number,
+      email,
+      username,
+      password,
+      dm,
+      online,
+    } = state;
     try {
       const user = await axios.post(
         `/auth/${loggingIn ? "login" : "register"}`,
         loggingIn
           ? { username, password }
-          : { first_name, last_name, phone_number, email, username, password, dm, online }
+          : {
+              first_name,
+              last_name,
+              phone_number,
+              email,
+              username,
+              password,
+              dm,
+              online,
+            }
       );
       getUser(user.data);
       history.push("/feed");
@@ -38,13 +56,13 @@ const Auth = ({ getUser }) => {
   };
 
   return (
-    <AuthForm
-      state={state}
-      setState={setState}
-      entryFn={entryFn}
-      loggingIn={loggingIn}
-      setLoggingIn={setLoggingIn}
-    />
+      <AuthForm
+        state={state}
+        setState={setState}
+        entryFn={entryFn}
+        loggingIn={loggingIn}
+        setLoggingIn={setLoggingIn}
+      />
   );
 };
 

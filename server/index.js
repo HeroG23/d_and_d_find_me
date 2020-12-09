@@ -9,6 +9,7 @@ const commCtrl = require("./commentController");
 const locCtrl = require("./locationController");
 const textCtrl = require("./textController");
 const emailCtrl = require("./emailController");
+const graphCtrl = require('./graphController');
 
 const { checkUser } = require("./middleware");
 
@@ -74,8 +75,11 @@ app.post("api/locate", locCtrl.postAddress);
 //#Text Endpoint
 app.post("/api/sendSMS", textCtrl.sendSMS);
 
-//#Email Endpoin
+//#Email Endpoint
 app.post("/api/email", emailCtrl.email)
+
+//#Graph Endpoint
+app.get('/api/graph', graphCtrl.getInfo);
 
 const port = SERVER_PORT;
 app.listen(port, () => console.log(`Server listening on port ${port}`));

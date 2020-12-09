@@ -32,7 +32,6 @@ function PostForm(props) {
 
   const formMapped = formArr.map((input) => (
     <div className="post-input" key={input.label}>
-      <label>{input.label}: </label>
       <input
         className="form-input"
         name={input.label}

@@ -30,11 +30,11 @@ class Email extends Component {
       }
     
       render() {
-        const { name, email, message, title,image } = this.state
+        const { name, email, message, title } = this.state
         return (
-          <div className="Email" style={styles.body}>
-            <div className="email-form" style={styles.form}>
-              <h1 className="email-header" style={styles.header}>Contact Us</h1>
+          <div style={styles.body}>
+            <div style={styles.form}>
+              <h1 style={styles.header}>Contact Us</h1>
               <input style={styles.input} placeholder='title' type="text" name='title' value={title} onChange={this.handleInput} />
               <input style={styles.input} placeholder='name' type="text" name='name' value={name} onChange={this.handleInput} />
               <input style={styles.input} placeholder='email' type="text" name='email' value={email} onChange={this.handleInput} />
@@ -56,31 +56,33 @@ class Email extends Component {
           display:'flex',
           flexDirection:'column',
           background:'rgba(255, 255, 255, 0.452)',
-          width:500,
+          width:300,
           alignItems:'center',
-          height:500,
+          height:300,
           justifyContent:'space-evenly',
           borderRadius:10
         },
         header:{
-          fontSize:60,
+          fontSize:30,
           margin:0,
           color:'black',
           letterSpacing:'0.07em',
-          fontWeight:'bold'
+          fontWeight:'700'
         },
         input:{
-          width:450,
-          height:50,
-          fontSize:35,
+          width:225,
+          height:25,
+          fontSize:20,
+          color: "white",
+          backgroundColor:"rgba(0, 0, 0, 0.648)",
           outline:'none'
         },
         button:{
-          width:200,
-          height:45,
+          width:100,
+          height:22.5,
           borderRadius:10,
           background:'green',
-          fontSize:35,
+          fontSize:17.5,
           fontWeight:'bold',
           letterSpacing:'0.07em'
         }
