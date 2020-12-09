@@ -27,7 +27,8 @@ const AuthForm = ({state, entryFn, setState, setLoggingIn, loggingIn}) => {
         <div className='Auth'>
             <form className="auth-form" onSubmit={e => entryFn(e)}>
                 <h1>D&D Find Me</h1>
-                <h2>{loggingIn ? "Login" : "Register"}</h2>
+                <h2>{loggingIn ? "Login" : "Register" }</h2>
+                <h3>{loggingIn ? null : "Please enter your phone number like this example: +12345678901"}</h3>
                 {inputsMapped}
                 <button className="entry-button" type="submit">
                     {loggingIn ? "Login" : "Register"}

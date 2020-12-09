@@ -18,3 +18,13 @@ button{
   background-color: black;
   color: white;
 }
+
+@media only screen and (max-width: 400px){
+  img{
+    width: 100px;
+    height: 100px;
+  }
+  .content-box{
+    width: 65%;
+  }
+}

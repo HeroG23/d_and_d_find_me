@@ -1,25 +1,59 @@
-header{
-    position: fixed;
-    top: 0;
-    right: 0;
-    display: flex;
-    flex-direction: row;
-    color: white;
-    border-radius: 20px;
-    border: 2px solid  black;
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  border-radius: 20px;
+  border: 2px solid black;
 }
 
-header > .nav-links{
-    background-color: rgba(195, 238, 211, 0.685);
-    display: flex;
-    flex-direction: row;
+header > .nav-links {
+  background-color: rgba(195, 238, 211, 0.685);
+  display: flex;
+  flex-direction: row;
 }
 
-header > .nav-links > a{
+header > .nav-links > a {
   border-radius: 5px;
   color: black;
   border: 2px solid rgb(23, 91, 122);
   padding: 10px 20px;
   text-align: center;
   display: flex;
+}
+
+@media only screen and (max-width: 400px) {
+  header {
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    display: -ms-flexbox;
+    display: inline-flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
+  header > .nav-links {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 800px){
+  header {
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  header > .nav-links{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}

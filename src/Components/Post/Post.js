@@ -44,21 +44,36 @@ const Post = (props) => {
 
   const deletePost = async (id) => {
     await axios.delete(`/api/posts/${id}`);
-    props.history.push("/feed")
-  }
+    props.history.push("/feed");
+  };
 
-  const onSubmitPressed = e => {
-    e.preventDefault()
+  const onSubmitPressed = (e) => {
+    e.preventDefault();
     setEdit(!edit);
     updatePost(post.id, post.content, post.address);
-  }
+  };
 
   //# fix this
   const commSubmit = async (e, body) => {
     e.preventDefault();
     if (props.user.username) {
-      await axios.post("/api/comments", {body, post_id: post.id})
-      setCreateComment(!createComment)
+      try {
+        let res = await axios.post("/api/comments", { body, post_id: post.id });
+        console.log(post);
+        if (res.status === 200) {
+          let message = await axios.post("/api/sendSMS", {
+            name: props.user.username,
+            message: res.data.body,
+            user_id: post.userId,
+          });
+          if (message.status !== 200) {
+            console.log("text failed");
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      setCreateComment(!createComment);
     } else {
       alert("Must be logged in to post a comment");
     }
@@ -70,16 +85,23 @@ const Post = (props) => {
         try {
           const post = await axios.get(`/api/posts/${props.match.params.id}`);
           // setPost({
-            //   id: post.data.post_id,
-            //   title: post.data.title,
-            //   username: post.data.username,
-            //   content: post.data.content,
-            //   address: post.data.post_address,
-            //   userId: post.data.user_id,
-            // });
+          //   id: post.data.post_id,
+          //   title: post.data.title,
+          //   username: post.data.username,
+          //   content: post.data.content,
+          //   address: post.data.post_address,
+          //   userId: post.data.user_id,
+          // });
           //# OR
-          const {post_id: id, title, username, content, post_address: address, user_id: userId} = post.data
-          setPost({id, title, username, content, address, userId})
+          const {
+            post_id: id,
+            title,
+            username,
+            content,
+            post_address: address,
+            user_id: userId,
+          } = post.data;
+          setPost({ id, title, username, content, address, userId });
         } catch (err) {
           console.log(err);
         }
@@ -101,7 +123,7 @@ const Post = (props) => {
     } else {
       setPost(props.post);
     }
-  }, [commSubmit, props.match, props.post]);
+  }, [props.match, props.post]);
 
   return (
     <div className="Post content-box">
@@ -111,22 +133,41 @@ const Post = (props) => {
         <div>
           <div>
             <div className="post-header">
-              <h2 className="title" style={{ fontSize: "24px" }}>
+              <h2
+                className="title"
+                style={{
+                  fontSize: "24px",
+                  textDecoration: "underline",
+                  margin: "1px",
+                }}
+              >
                 {post.title}
               </h2>
               <div className="author-box">
-                <p>by {post.username}</p>
+                <p
+                  style={{
+                    margin: "2px",
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  by {post.username}
+                </p>
               </div>
             </div>
             {post.userId && edit ? (
-              <form onSubmit={e => onSubmitPressed(e)}>
+              <form onSubmit={(e) => onSubmitPressed(e)}>
                 <input
                   value={post.content}
-                  onChange={(e) => setPost({...post, content: e.target.value})}
+                  onChange={(e) =>
+                    setPost({ ...post, content: e.target.value })
+                  }
                 />
                 <input
                   value={post.address}
-                  onChange={(e) => setPost({...post, address: e.target.value})}
+                  onChange={(e) =>
+                    setPost({ ...post, address: e.target.value })
+                  }
                 />
                 <button type="submit">Save Update</button>
                 <button type="reset" onClick={() => setEdit(!edit)}>
@@ -143,16 +184,18 @@ const Post = (props) => {
             {post.userId && !edit ? (
               <div>
                 <button onClick={() => setEdit(!edit)}>Update Post</button>
-                <button onClick={() => deletePost(post.id)}>
-                  Delete Post
-                </button>
+                <button onClick={() => deletePost(post.id)}>Delete Post</button>
               </div>
             ) : null}
           </div>
           <div className="createComment">
             {props.user.user_id && createComment ? (
               <div>
-                <CommForm key={post.post_id} post={post} commSubmit={commSubmit}/>{" "}
+                <CommForm
+                  key={post.post_id}
+                  post={post}
+                  commSubmit={commSubmit}
+                />{" "}
                 <button onClick={() => setCreateComment(!createComment)}>
                   Cancel Comment
                 </button>

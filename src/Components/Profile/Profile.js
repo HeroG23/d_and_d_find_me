@@ -39,7 +39,6 @@ const Profile = (props) => {
 
   return (
     <div className="Profile content-box">
-      {console.log(props)}
       <div className="user-info" style={{ border: "2px solid black" }}>
         <h1
           style={{

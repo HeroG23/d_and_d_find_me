@@ -22,7 +22,6 @@ const Feed = () => {
     };
     getPosts();
   }, [search]);
-  
 
   return (
     <div className="Feed content-box">
@@ -47,7 +46,7 @@ const Feed = () => {
             {posts.map((post) => (
               <li key={post.post_id}>
                 <Link
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none", color: "black" }}
                   to={`/posts/${post.post_id}`}
                 >
                   <Post post={post} />
