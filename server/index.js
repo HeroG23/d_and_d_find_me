@@ -2,7 +2,7 @@ require("dotenv").config({path: __dirname + '/../.env'});
 const express = require("express");
 const massive = require("massive");
 const session = require("express-session");
-const path = require('path')
+const path = require('path');
 
 const userCtrl = require("./userController");
 const postCtrl = require("./postController");
@@ -22,7 +22,10 @@ const {
 
 const app = express();
 
+app.use(express.static(__dirname + '/../build'))
+
 app.use(express.json());
+
 app.use(
   session({
     resave: false,
@@ -33,7 +36,6 @@ app.use(
     },
   })
 );
-app.use(express.static(__dirname + '/../build'))
 
 massive({
   connectionString: CONNECTION_STRING,
