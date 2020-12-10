@@ -48,10 +48,6 @@ massive({
   .catch((err) => console.log(err));
 
 //!ENDPOINTS
-//#Hosting Endpoint
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'))
-})
 //# User Endpoints
 app.get("/api/user", checkUser, userCtrl.getUser);
 app.put("/auth/user", checkUser, userCtrl.editUser);
@@ -87,5 +83,9 @@ app.post("/api/email", emailCtrl.email)
 //#Graph Endpoint
 app.get('/api/graph', graphCtrl.getInfo);
 
+//#Hosting Endpoint
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'))
+})
 const port = SERVER_PORT;
 app.listen(port, () => console.log(`Server listening on port ${port}`));
