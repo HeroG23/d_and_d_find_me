@@ -1,7 +1,8 @@
-require("dotenv").config();
+require("dotenv").config({path: __dirname + '/../.env'});
 const express = require("express");
 const massive = require("massive");
 const session = require("express-session");
+const path = require('path')
 
 const userCtrl = require("./userController");
 const postCtrl = require("./postController");
@@ -32,6 +33,7 @@ app.use(
     },
   })
 );
+app.use(express.static(__dirname + '/../build'))
 
 massive({
   connectionString: CONNECTION_STRING,
@@ -46,6 +48,10 @@ massive({
   .catch((err) => console.log(err));
 
 //!ENDPOINTS
+//#Hosting Endpoint
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'))
+})
 //# User Endpoints
 app.get("/api/user", checkUser, userCtrl.getUser);
 app.put("/auth/user", checkUser, userCtrl.editUser);

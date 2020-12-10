@@ -21,7 +21,6 @@ const Profile = (props) => {
         dm,
         online,
       });
-      console.log(res.data)
       setUser({ ...props.user, dm: res.data.dm, online: res.data.online });
       getUser({...props.user, dm: res.data.dm, online: res.data.online})
       setEdit(!edit)
@@ -29,7 +28,7 @@ const Profile = (props) => {
       console.log(err);
     }
   };
-
+ console.log(props)
   return (
     <div className="Profile content-box">
       <div className="user-info" style={{ border: "2px solid black" }}>

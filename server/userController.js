@@ -34,6 +34,7 @@ module.exports = {
             email: foundUser.email,
             username: foundUser.username,
             dm: foundUser.dm,
+            online: foundUser.online
           };
           res.status(200).send(req.session.user);
         } else {

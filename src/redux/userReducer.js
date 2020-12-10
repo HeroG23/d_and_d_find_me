@@ -5,6 +5,7 @@ const initialState = {
   email: "",
   username: "",
   dm: "",
+  online: "",
   user_id: "",
 };
 
@@ -36,6 +37,7 @@ export default function reducer(state = initialState, action) {
         email: payload.email,
         username: payload.username,
         dm: payload.dm,
+        online: payload.online,
         user_id: payload.user_id,
       };
     case LOGOUT:
