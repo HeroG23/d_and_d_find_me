@@ -8,7 +8,7 @@ module.exports = {
     const db = req.app.get("db");
     const { dm, online } = req.body;
     const { user_id } = req.session.user;
-    const [updatedUser] = await db.auth.edit_user([user_id, dm, online]);
+    const [updatedUser] = await db.auth.update_user([user_id, dm, online]);
 
     req.session.user = updatedUser;
     res.status(200).send(req.session.user);
