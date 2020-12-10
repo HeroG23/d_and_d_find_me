@@ -89,4 +89,8 @@
     .auth-inputs > input{
         width: 20vw;
     }
+
+    .Auth{
+        background-repeat: repeat;
+    }
 }
