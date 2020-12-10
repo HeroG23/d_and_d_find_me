@@ -19,11 +19,11 @@ const Graph = () => {
     <div>
       <Pie
         data={{
-          labels: ["dm", "adventurer"],
+          labels: ["DM", "Adventurers", "In person", "Online"],
           datasets: [
             {
               data: data,
-              backgroundColor: ["rgba(0,0,255,0.637", "rgba(255, 0, 0, 0.637"],
+              backgroundColor: ["rgba(0,0,255,0.637", "rgba(255, 0, 0, 0.637", "rgba(0, 255, 0, 0.637)", "rgb(70, 158, 70, 0.637)"],
             },
           ],
         }}

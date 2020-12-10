@@ -1,8 +1,7 @@
 import axios from "axios";
 import { connect } from "react-redux";
-import { useState, useEffect } from "react";
-import ProfilePost from "./ProfilePost";
-import ProfileComment from "./ProfileComment";
+import { useState} from "react";
+
 
 const styles = {
   name: { fontSize: "28px", fontWeight: "600" },
@@ -10,32 +9,18 @@ const styles = {
 };
 
 const Profile = (props) => {
-  const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [display, setDisplay] = useState(false);
+  const [user, setUser] = useState(props.user)
+  const [edit, setEdit] = useState(false);
 
-  useEffect(() => {
-    const getUserPosts = async () => {
-      try {
-        const posts = await axios.get(`/api/user/posts/${props.user.user_id}`);
-        setPosts(posts.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    const getUserComments = async () => {
-      try {
-        const comments = await axios.get(
-          `/api/user/comments/${props.user.user_id}`
-        );
-        setComments(comments.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUserPosts();
-    getUserComments();
-  }, []);
+  const updateUser = async (e) =>{
+    e.preventDefault();
+    try{
+      const res = await axios.put('/auth/user', {user_id: props.user.user_id, dm: props.user.dm, online: props.user.online} )
+      setUser({...user, dm:res.data, online: res.data})
+    } catch(err){
+      console.log(err)
+    }
+  }
 
   return (
     <div className="Profile content-box">
@@ -55,35 +40,10 @@ const Profile = (props) => {
         ) : (
           <h3 style={styles.dm}>I am just a mere adventurer</h3>
         )}
-      </div>
-      <div className="profile-container" style={{ border: "1px solid white" }}>
-        {posts.length < 1 ? (
-          <div>Loading User Posts..</div>
-        ) : (
-          <div>
-            {
-              <ul style={{ listStyle: "none" }}>
-                {posts.map((post) => (
-                  <li key={post.post_id}>
-                    <ProfilePost post={post} />
-                  </li>
-                ))}
-              </ul>
-            }
-          </div>
-        )}
-        {comments.length < 1 ? (
-          <div>Loading User Comments...</div>
-        ) : (
-          <div>
-            <ul style={{ listStyle: "none" }}>
-              {comments.map((comment) => (
-                <li key={comment.comment_id}>
-                  <ProfileComment comment={comment} />
-                </li>
-              ))}
-            </ul>
-          </div>
+        {props.user.online ?(
+          <h3 style={styles.dm}>I can't adventure in person</h3>
+        ):(
+          <h3 style={styles.dm}>I like adventuring in person</h3>
         )}
       </div>
     </div>

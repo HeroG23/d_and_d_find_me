@@ -6,9 +6,9 @@ module.exports = {
   },
   editUser: async (req, res) => {
     const db = req.app.get("db");
-    const { phone_number, dm } = req.body;
+    const { dm, online } = req.body;
     const { user_id } = req.session.user;
-    const [updatedUser] = await db.auth.edit_user([user_id, phone_number, dm]);
+    const [updatedUser] = await db.auth.edit_user([user_id, dm, online]);
 
     req.session.user = updatedUser;
     res.status(200).send(req.session.user);
