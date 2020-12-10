@@ -10,5 +10,10 @@
 
 .feed-header > h1{
       background-color: rgba(255, 255, 255, 0.452); 
-      width: 10%;
+      width: 10vw;
+}
+@media only screen and (max-width: 400px){
+.feed-header > h1{
+    width: 20vw;
+}
 }
