@@ -28,7 +28,6 @@ const Profile = (props) => {
       console.log(err);
     }
   };
- console.log(props)
   return (
     <div className="Profile content-box">
       <div className="user-info" style={{ border: "2px solid black" }}>

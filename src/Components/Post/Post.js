@@ -59,7 +59,6 @@ const Post = (props) => {
     if (props.user.username) {
       try {
         let res = await axios.post("/api/comments", { body, post_id: post.id });
-        console.log(post);
         if (res.status === 200) {
           let message = await axios.post("/api/sendSMS", {
             name: props.user.username,
