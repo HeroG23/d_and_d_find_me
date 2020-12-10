@@ -28,6 +28,7 @@ header > .nav-links > a {
   header {
     position: fixed;
     height: 100vh;
+    width: 30%;
     top: 0;
     right: 0;
     display: -ms-flexbox;
