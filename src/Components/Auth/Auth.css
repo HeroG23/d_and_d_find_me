@@ -19,7 +19,7 @@
 .auth-form{
     border-radius: 20px;
     width: 35vw;
-    height: 55vh;
+    height: 58vh;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
@@ -78,6 +78,19 @@
 }
 
 @media only screen and (max-width: 400px){
+    .auth-form > h1 {
+        font-size: 30px;
+    }
+
+    .auth-form > h2{
+        font-size: 25px;
+    }
+
+    .auth-form{
+        height: 65vh;
+        width: 55vw;
+    }
+
     .auth-inputs{
         width: 40px;
         display: flex;
