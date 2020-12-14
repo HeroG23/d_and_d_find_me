@@ -19,7 +19,7 @@
 .auth-form{
     border-radius: 20px;
     width: 35vw;
-    height: 58vh;
+    height: 70vh;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
@@ -61,7 +61,7 @@
     background-color: rgba(0, 0, 0, 0.534);
     position: absolute;
     top: 0;
-    right: 0;
+    right: 3px;
     height: 100px;
     width: 100px;
     font-size: 20px;
