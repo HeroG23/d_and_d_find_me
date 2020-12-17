@@ -35,6 +35,9 @@ button{
   }
 }
 @media only screen and (max-width: 400px){
+  .App{
+    background-repeat: repeat;
+  }
   img{
     width: 100px;
     height: 100px;
