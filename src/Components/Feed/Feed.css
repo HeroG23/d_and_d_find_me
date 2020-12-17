@@ -16,6 +16,9 @@
       width: 10vw;
 }
 @media only screen and (max-width: 400px){
+.Feed{
+    background-repeat: repeat;
+}
 .feed-header > h1{
     width: 20vw;
 }
