@@ -5,11 +5,14 @@
     flex-direction: column;
     justify-content: center;
     justify-content: space-evenly;
+    background-image: url('https://cdnb.artstation.com/p/assets/images/images/018/743/873/large/jonathan-t-campfirew.jpg?1560533001');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .feed-header > h1{
       background-color: rgba(255, 255, 255, 0.452); 
-      background-size: 50%;
       width: 10vw;
 }
 @media only screen and (max-width: 400px){
